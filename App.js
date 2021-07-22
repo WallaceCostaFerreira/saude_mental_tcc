@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 
 import Login from './src/pages/Login';
 import Register from './src/pages/Register';
+import RegisterPass2 from './src/pages/Register/RegisterPass2';
 import SplashScreen from './src/pages/SplashScreen';
 
 const Stack = createStackNavigator()
@@ -25,6 +26,11 @@ export default function App() {
           component={SplashScreen}
           options={{ title: 'Inicio',
           headerShown:false, }}
+        />
+        <Stack.Screen 
+          name="RegisterPass2"
+          component={RegisterPass2}
+          options={{ title: 'Continuar Cadastro',}}
         />
       </Stack.Navigator>
     </NavigationContainer>
