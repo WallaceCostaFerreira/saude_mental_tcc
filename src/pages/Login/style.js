@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#98FB98',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop:20,
+        marginTop:10,
         borderRadius:20,
     },txtbutton:{
         color:'#FFFFFF'
@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
         marginTop:10,
     },txtlink:{
         color:'#7E62FC',
+    },msgError:{
+        marginTop:10,
+        color:'#CF3131',
+        fontSize:10,
+        textAlign:'center',
+        marginLeft:20,
+        marginRight:20,
     }
 });
 

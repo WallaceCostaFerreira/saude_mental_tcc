@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
         fontSize: 22,
         marginBottom: 20,
         textAlign: 'center',
+    },subtitle:{
+        color:'#ABABAB',
+        fontSize: 14,
+        marginTop: 20,
+        marginBottom: 20,
+        textAlign: 'center',
     },input:{
         width:'80%',
         height: 40,
@@ -35,13 +41,25 @@ const styles = StyleSheet.create({
         marginTop:10,
     },txtlink:{
         color:'#7E62FC',
-    },msgError:{
-        marginTop:10,
-        color:'#CF3131',
+    },CommunityCheckbox:{
+        flexDirection: "row",
+        marginBottom:8,
+    },checkboxContainer:{
+        flexDirection: "row",
+        marginLeft:8,
+        marginRight:8,
+        borderWidth:1,
+        borderRadius:30,
+        borderColor:'#ABABAB'
+    },checkbox:{
+        alignSelf: "center",
+        width:10,
+        height:10,
+    }, txtCommunity:{
         fontSize:10,
-        textAlign:'center',
-        marginLeft:20,
-        marginRight:20,
+        color:'#ABABAB',
+        marginLeft: 20,
+        margin: 5,
     }
 });
 

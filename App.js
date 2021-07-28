@@ -6,6 +6,7 @@ import Login from './src/pages/Login';
 import Register from './src/pages/Register';
 import RegisterPass2 from './src/pages/Register/RegisterPass2';
 import SplashScreen from './src/pages/SplashScreen';
+import Feed from "./src/pages/Feed";
 
 const Stack = createStackNavigator()
 
@@ -31,6 +32,10 @@ export default function App() {
           name="RegisterPass2"
           component={RegisterPass2}
           options={{ title: 'Continuar Cadastro',}}
+        />
+        <Stack.Screen 
+          name="Feed"
+          component={Feed}
         />
       </Stack.Navigator>
     </NavigationContainer>
