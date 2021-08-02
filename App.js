@@ -13,14 +13,16 @@ const Stack = createStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen 
           name="Login"
           component={Login}
+          options={{ headerShown:false, }}
         />
         <Stack.Screen 
           name="Register"
           component={Register}
+          options={{ headerShown:false, }}
         />
         <Stack.Screen 
           name="SplashScreen"
@@ -36,6 +38,7 @@ export default function App() {
         <Stack.Screen 
           name="Feed"
           component={Feed}
+          options={{ headerShown:false, }}
         />
       </Stack.Navigator>
     </NavigationContainer>
