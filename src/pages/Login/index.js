@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect } from 'react';
-import { KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
+import { ActivityIndicator ,KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
 
 import styles from "./style"
 import firebase from '../../config/Firebaseconfig';
@@ -43,6 +43,7 @@ export default function SplashScreen({ navigation }){
 
     return(
         <KeyboardAvoidingView style={styles.container}>
+            
             <Text style={styles.title}>Saúde Mental</Text>
             <TextInput 
                 style={styles.input}
@@ -61,6 +62,7 @@ export default function SplashScreen({ navigation }){
             {errorLogin === true ? 
             <Text 
                 style={styles.msgError}>{msgError}</Text>
+                
             :
             <Text></Text>
             }
