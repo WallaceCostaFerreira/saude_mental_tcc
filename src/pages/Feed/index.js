@@ -25,14 +25,17 @@ import {
     PostActions,
     PostButton,
     PostActionText,
-    PostImage,
-    Footer } from "./style";
+    PostImage } from "./style";
 
 import firebase from '../../config/Firebaseconfig';
 
 import imgTest from '../../images/imgteste.jpg'
 
 export default function Feed({ navigation }){
+
+    const toProfile = () =>{
+        navigation.navigate("Profile");
+    }
 
     const logOut = () =>{
         firebase.auth().signOut().then(() => {
@@ -49,7 +52,7 @@ export default function Feed({ navigation }){
                 backgroundColor="#98FB98"
                 hidden={false} />
             <Header>
-                <ProfileView>
+                <ProfileView onPress={toProfile}>
                     <ProfileImg>
                         <Feather
                             name={'user'}

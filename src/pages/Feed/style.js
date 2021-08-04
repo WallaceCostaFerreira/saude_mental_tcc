@@ -28,7 +28,7 @@ export const ActionButton = styled.TouchableOpacity`
     margin-left:8;
 `;
 
-export const ProfileView = styled.View`
+export const ProfileView = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
 `;
@@ -130,7 +130,6 @@ export const PostText = styled.Text`
 export const PostImage = styled.Image`
     width: 100%;
     height: 120px;
-    color: #000;
 `;
 
 export const PostActions = styled.View`
