@@ -12,24 +12,23 @@ import {
     CommunityView,
     CommunityBody,
     Communities,
-    CommunityText
+    CommunityText,
 } from "./style";
 
-import firebase from '../../config/Firebaseconfig';
+import Posts from "../../components/Post";
 
-import imgTest from '../../images/imgteste.jpg'
+import imgTest from "../../../assets/imgteste.jpg"
 
 export default function Profile() {
     return (
-        <Container>
+        <Container showsVerticalScrollIndicator={false}>
             <Header>
                 <ProfileImg source={imgTest}/>
             </Header>
             <Body>
                 <UserInfos>
-                    <TitlesText>Seus dados</TitlesText>
-                    <InfosText>Nome: Wal2000Costa</InfosText>
-                    <InfosText>Telefone: +55(11)91234-1234</InfosText>                    
+                    <TitlesText>Wallace Costa Ferreira</TitlesText>
+                    <InfosText>+55(11)91234-1234</InfosText>                    
                 </UserInfos>
                 <CommunityView>
                     <TitlesText>Comunidades</TitlesText>
@@ -48,6 +47,10 @@ export default function Profile() {
                         </Communities>
                     </CommunityBody>
                 </CommunityView>
+                <Posts/>
+                <Posts/>
+                <Posts/>
+                <Posts/>
             </Body>
         </Container>
     )

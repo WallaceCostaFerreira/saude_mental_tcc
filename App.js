@@ -45,7 +45,7 @@ export default function App() {
           name="Profile"
           component={Profile}
           options={{ headerShown:true,
-          title:"Wallace Costa" }}
+          title:"Perfil" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

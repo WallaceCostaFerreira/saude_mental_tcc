@@ -10,26 +10,12 @@ import {
     ProfileView, 
     ProfileText, 
     Header, 
-    Body, 
-    CommunityView, 
-    CommunityText, 
-    CommunityHeader, 
-    CommunityBody, 
-    Communities,
-    FeedContainer,
-    PostView,
-    PostHeader,
-    PostCommunityText,
-    PostBody,
-    PostText,
-    PostActions,
-    PostButton,
-    PostActionText,
-    PostImage } from "./style";
+    Body } from "./style";
+
+import Posts from "../../components/Post";
+import Communities from "../../components/Communities";
 
 import firebase from '../../config/Firebaseconfig';
-
-import imgTest from '../../images/imgteste.jpg'
 
 export default function Feed({ navigation }){
 
@@ -88,140 +74,10 @@ export default function Feed({ navigation }){
                 </ActionsView>
             </Header>
             <Body showsVerticalScrollIndicator={false}>
-                <CommunityView>
-                    <CommunityHeader>
-                        <CommunityText>Suas comunidades</CommunityText>
-                        <Feather
-                            style={{ margin:3 }}
-                            name={'more-horizontal'}
-                            size={14}
-                            color={'#000'}
-                        />
-                    </CommunityHeader>
-                    <CommunityBody>
-                        <Communities>
-                            <CommunityText>Ansiedade</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>Depressão</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                        <Communities>
-                            <CommunityText>TDAH</CommunityText>
-                        </Communities>
-                    </CommunityBody>
-                </CommunityView>
-                <FeedContainer>
-                    <PostView>
-                        <PostHeader>
-                            <ProfileView>
-                                <ProfileImg>
-                                    <Feather
-                                        name={'user'}
-                                        size={18}
-                                        color={'#fff'}
-                                    />
-                                </ProfileImg>
-                                <ProfileText>João josé</ProfileText>
-                            </ProfileView>
-                            <PostCommunityText>Ansiedade</PostCommunityText>
-                            <Feather
-                                style={{ margin:3 }}
-                                name={'more-vertical'}
-                                size={14}
-                                color={'#000'}
-                            />
-                        </PostHeader>
-                        <PostBody>
-                            <PostText>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</PostText>
-                            <PostImage source={ imgTest }/>
-                        </PostBody>
-                        <PostActions>
-                            <PostButton>
-                                <Feather
-                                    style={{ marginRight:6 }}
-                                    name={'heart'}
-                                    size={20}
-                                    color={'#FF2E2E'}
-                                />
-                                <PostActionText>Amei</PostActionText>
-                            </PostButton>
-                            <PostButton>
-                                <Feather
-                                    style={{ marginRight:6 }}
-                                    name={'message-square'}
-                                    size={20}
-                                    color={'#000'}
-                                />
-                                <PostActionText>Comentar</PostActionText>
-                            </PostButton>
-                        </PostActions>
-                    </PostView>
-
-                    <PostView>
-                        <PostHeader>
-                            <ProfileView>
-                                <ProfileImg>
-                                    <Feather
-                                        name={'user'}
-                                        size={18}
-                                        color={'#fff'}
-                                    />
-                                </ProfileImg>
-                                <ProfileText>Pedro Alves</ProfileText>
-                            </ProfileView>
-                            <PostCommunityText>Depressão</PostCommunityText>
-                            <Feather
-                                style={{ margin:3 }}
-                                name={'more-vertical'}
-                                size={14}
-                                color={'#000'}
-                            />
-                        </PostHeader>
-                        <PostBody>
-                            <PostText>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</PostText>
-                            <PostImage source={ imgTest }/>
-                        </PostBody>
-                        <PostActions>
-                            <PostButton>
-                                <Feather
-                                    style={{ marginRight:6 }}
-                                    name={'heart'}
-                                    size={20}
-                                    color={'#FF2E2E'}
-                                />
-                                <PostActionText>Amei</PostActionText>
-                            </PostButton>
-                            <PostButton>
-                                <Feather
-                                    style={{ marginRight:6 }}
-                                    name={'message-square'}
-                                    size={20}
-                                    color={'#000'}
-                                />
-                                <PostActionText>Comentar</PostActionText>
-                            </PostButton>
-                        </PostActions>
-                    </PostView>
-
-                </FeedContainer>
+                <Communities/>
+                <Posts/>
+                <Posts/>
+                <Posts/>
             </Body>
         </Container>
     )
