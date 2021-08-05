@@ -7,6 +7,7 @@ import Register from './src/pages/Register';
 import RegisterPass2 from './src/pages/Register/RegisterPass2';
 import SplashScreen from './src/pages/SplashScreen';
 import Feed from "./src/pages/Feed";
+import Profile from "./src/pages/Profile";
 
 const Stack = createStackNavigator()
 
@@ -39,6 +40,12 @@ export default function App() {
           name="Feed"
           component={Feed}
           options={{ headerShown:false, }}
+        />
+        <Stack.Screen 
+          name="Profile"
+          component={Profile}
+          options={{ headerShown:true,
+          title:"Wallace Costa" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
