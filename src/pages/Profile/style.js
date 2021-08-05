@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 // import { StyleSheet } from 'react-native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
     flex:1;
     background: #FFFFFF;
 `;
@@ -74,4 +74,9 @@ export const CommunityText = styled.Text`
     color: rgba(0,0,0,0.4);
     font-size: 10px;
     margin: 3px 8px;
+`;
+
+export const PostsContainer = styled.View`
+    align-items: center;
+    margin-top: 10px;
 `;
