@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 
 import {
@@ -17,58 +17,68 @@ import {
     FeedContainer
 } from './style';
 
+
 import imgTest from '../../../assets/imgteste.jpg'
 
-const Post = () => {
-    return (
-        <FeedContainer>
-            <PostView>
-                <PostHeader>
-                    <ProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={'#fff'}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Pedro Alves</ProfileText>
-                    </ProfileView>
-                    <PostCommunityText>Depressão</PostCommunityText>
-                    <Feather
-                        style={{ margin:3 }}
-                        name={'more-vertical'}
-                        size={14}
-                        color={'#000'}
-                    />
-                </PostHeader>
-                <PostBody>
-                    <PostText>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</PostText>
-                    <PostImage source={ imgTest }/>
-                </PostBody>
-                <PostActions>
-                    <PostButton>
+class Post extends Component{
+    render(){
+        const { onEventPropsClick } = this.props;
+        const { onCommentsPropsClick } = this.props;
+        return (
+            <FeedContainer>
+                <PostView>
+                    <PostHeader>
+                        <ProfileView>
+                            <ProfileImg>
+                                <Feather
+                                    name={'user'}
+                                    size={18}
+                                    color={'#fff'}
+                                />
+                            </ProfileImg>
+                            <ProfileText>{this.props.name}</ProfileText>
+                        </ProfileView>
+                        <PostCommunityText>{this.props.community}</PostCommunityText>
+                        
                         <Feather
-                            style={{ marginRight:6 }}
-                            name={'heart'}
-                            size={20}
-                            color={'#FF2E2E'}
-                        />
-                        <PostActionText>Amei</PostActionText>
-                    </PostButton>
-                    <PostButton>
-                        <Feather
-                            style={{ marginRight:6 }}
-                            name={'message-square'}
-                            size={20}
+                            style={{ margin:3 }}
+                            name={'more-vertical'}
+                            size={14}
                             color={'#000'}
+                            onPress={() => onEventPropsClick()}
                         />
-                        <PostActionText>Comentar</PostActionText>
-                    </PostButton>
-                </PostActions>
-            </PostView>
-        </FeedContainer>
-    )
+                    </PostHeader>
+                    <PostBody>
+                        <PostText>{this.props.textPublish}</PostText>
+                        <PostImage source={ imgTest }/>
+                    </PostBody>
+                    <PostActions>
+                        <PostButton
+                            // onPress={() => onCommentsPropsClick()}
+                            >
+                            <Feather
+                                style={{ marginRight:6 }}
+                                name={'bookmark'}
+                                size={20}
+                                color={'#000'}
+                            />
+                            <PostActionText>Salvar</PostActionText>
+                        </PostButton>
+                        <PostButton
+                            onPress={() => onCommentsPropsClick()}>
+                            <Feather
+                                style={{ marginRight:6 }}
+                                name={'message-square'}
+                                size={20}
+                                color={'#000'}
+                            />
+                            <PostActionText>Comentar</PostActionText>
+                        </PostButton>
+                    </PostActions>
+                </PostView>
+            </FeedContainer>
+        );
+    }
 }
 
 export default Post;

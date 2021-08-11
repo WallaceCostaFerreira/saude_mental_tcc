@@ -18,6 +18,7 @@ import {
 import Posts from "../../components/Post";
 
 import imgTest from "../../../assets/imgteste.jpg"
+import postsDados from '../../components/Post/posts.json'
 
 export default function Profile() {
     return (
@@ -47,10 +48,13 @@ export default function Profile() {
                         </Communities>
                     </CommunityBody>
                 </CommunityView>
-                <Posts/>
-                <Posts/>
-                <Posts/>
-                <Posts/>
+                {postsDados && postsDados.map((post,index) =>(
+                    <Posts  name={post.name}
+                            community={post.community}
+                            textPublish={post.textPublish}
+                            photo={post.photo}
+                    />
+                ))}
             </Body>
         </Container>
     )
