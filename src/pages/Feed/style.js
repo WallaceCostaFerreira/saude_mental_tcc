@@ -53,5 +53,50 @@ export const Body = styled.ScrollView`
     flex: 1;
 `;
 
+export const HeaderRepostView = styled.View`
+    width: 90%;
+    flex-direction: row;
+    margin: 4px 20px;
+    margin-top: 10px;
+    border-bottom-width:1px;
+    border-bottom-color:rgba(0,0,0,0.1);
+`;
 
+export const ReportView = styled.KeyboardAvoidingView`
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`;
 
+export const ReportButton = styled.TouchableOpacity`
+    width:90%;
+    margin-top:10px;
+    background-color: rgba(255,0,0,0.2);
+    padding:10px;
+    border-radius:5px;
+`;
+
+export const ReportText = styled.Text`
+    font-size: 14;
+    color:rgba(0,0,0,0.5);
+`;
+
+export const ReportTextDescription = styled.Text`
+    color:rgba(0,0,0,0.5);
+    font-size:16;
+`;
+
+export const ReportInputDescription = styled.TextInput`
+    background-color: rgba(0,0,0,0.05);
+    padding-left:10px;
+    width: 90%;
+    height: 80px;
+`;
+
+export const ReportActionButton = styled.TouchableOpacity`
+    background:#98FB98;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 20px;
+`;
