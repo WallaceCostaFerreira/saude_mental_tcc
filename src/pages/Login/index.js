@@ -5,19 +5,21 @@ import { ActivityIndicator ,KeyboardAvoidingView, TextInput, TouchableOpacity, T
 import styles from "./style"
 import firebase from '../../config/Firebaseconfig';
 
-export default function SplashScreen({ navigation }){
+export default function Login({ navigation }){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorLogin, setErrorLogin] = useState("");
     const [msgError, setMsgError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const loginFirebase = () =>{
-
+        setLoading(true);
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
+            setLoading(false);
             navigation.navigate("Feed");
         })
         .catch((error) => {
@@ -25,14 +27,18 @@ export default function SplashScreen({ navigation }){
             var errorMessage = error.message;
             setErrorLogin(true);
             setMsgError(errorMessage);
+            setLoading(false);
         });
-
     }
 
     useEffect(()=>{
+        setLoading(true);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                setLoading(false);
                 navigation.navigate("Feed",{idUser:user.uid});
+            }else{
+                setLoading(false);
             }
         });
     },[])
@@ -40,6 +46,8 @@ export default function SplashScreen({ navigation }){
     function toRegister(){
         navigation.navigate("Register");
     }
+
+    
 
     return(
         <KeyboardAvoidingView style={styles.container}>
@@ -69,7 +77,10 @@ export default function SplashScreen({ navigation }){
             <TouchableOpacity 
                 style={styles.button}
                 onPress={loginFirebase}>
-                <Text style={styles.txtbutton}>Logar</Text>
+                {loading 
+                ? <ActivityIndicator size="small" color="#fff"/> 
+                : <Text style={styles.txtbutton}>Logar</Text>}
+                
             </TouchableOpacity>
             <Text style={styles.txtCadastrar}>Não tenho cadastro, 
                 <Text 
@@ -77,6 +88,9 @@ export default function SplashScreen({ navigation }){
                     onPress={toRegister}> cadastrar-se!
                 </Text>
             </Text>
+
+            
+            
         </KeyboardAvoidingView>
     )
 }
