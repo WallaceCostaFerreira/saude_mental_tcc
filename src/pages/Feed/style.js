@@ -89,9 +89,10 @@ export const ReportTextDescription = styled.Text`
 
 export const ReportInputDescription = styled.TextInput`
     background-color: rgba(0,0,0,0.05);
-    padding-left:10px;
+    padding:10px;
     width: 90%;
     height: 80px;
+    textAlignVertical: top;
 `;
 
 export const ReportActionButton = styled.TouchableOpacity`
