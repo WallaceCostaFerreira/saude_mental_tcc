@@ -46,6 +46,7 @@ export default function App() {
           name="Profile"
           component={Profile}
           options={{ headerShown:true,
+          headerTintColor:'#000',
           title:"Perfil" }}
         />
         <Stack.Screen 

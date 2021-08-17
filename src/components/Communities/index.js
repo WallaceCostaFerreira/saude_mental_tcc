@@ -1,5 +1,6 @@
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather';
+import theme from '../../constants/theme';
 
 import {
     CommunityView,
@@ -18,7 +19,7 @@ const Communities = () => {
                     style={{ margin:3 }}
                     name={'more-horizontal'}
                     size={14}
-                    color={'#000'}
+                    color={theme.colors.black}
                 />
             </CommunityHeader>
             <CommunityBody>

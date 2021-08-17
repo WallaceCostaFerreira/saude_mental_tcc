@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
-// import { StyleSheet } from 'react-native';
+import theme from '../../constants/theme';
 
 export const Container = styled.View`
     flex:1;
-    background: #FFFFFF;
+    background: ${theme.colors.white};
 `;
 
 export const Header = styled.View`
@@ -14,7 +14,7 @@ export const Header = styled.View`
 
 export const ActionsView = styled.SafeAreaView`
     margin:8px 3px;
-    background: #fff;
+    background: ${theme.colors.white};
     flex-direction: row;
 `;
 
@@ -24,7 +24,7 @@ export const ActionButton = styled.TouchableOpacity`
     justify-content:center;
     align-items:center;
     border-radius:15;
-    background:#98FB98;
+    background:${theme.colors.primary};
     margin-left:8;
 `;
 
@@ -36,7 +36,7 @@ export const ProfileView = styled.TouchableOpacity`
 export const ProfileImg = styled.View`
     width:30;
     height:30;
-    background:#98FB98;
+    background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
     border-radius:15;
@@ -44,7 +44,7 @@ export const ProfileImg = styled.View`
 
 export const ProfileText = styled.Text`
     font-size: 12;
-    color: rgba(0,0,0,0.5);
+    color: ${theme.colors.textGray};
     margin-left: 10px;
 `;
 
@@ -79,16 +79,16 @@ export const ReportButton = styled.TouchableOpacity`
 
 export const ReportText = styled.Text`
     font-size: 14;
-    color:rgba(0,0,0,0.5);
+    color:${theme.colors.textGray};
 `;
 
 export const ReportTextDescription = styled.Text`
-    color:rgba(0,0,0,0.5);
+    color:${theme.colors.textGray};
     font-size:16;
 `;
 
 export const ReportInputDescription = styled.TextInput`
-    background-color: rgba(0,0,0,0.05);
+    background-color: ${theme.colors.lightGray};
     padding:10px;
     width: 90%;
     height: 80px;
@@ -96,7 +96,7 @@ export const ReportInputDescription = styled.TextInput`
 `;
 
 export const ReportActionButton = styled.TouchableOpacity`
-    background:#98FB98;
+    background:${theme.colors.primary};
     padding: 10px 20px;
     margin-top: 10px;
     border-radius: 20px;

@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import theme from "../../constants/theme";
 
 export const FeedContainer = styled.View`
-    background: #fff;
+    background: ${theme.colors.white};
 `;
 
 export const PostView = styled.View`
@@ -26,7 +27,7 @@ export const ProfileView = styled.TouchableOpacity`
 export const ProfileImg = styled.View`
     width:30;
     height:30;
-    background:#98FB98;
+    background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
     border-radius:15;
@@ -34,7 +35,7 @@ export const ProfileImg = styled.View`
 
 export const ProfileText = styled.Text`
     font-size: 12;
-    color: rgba(0,0,0,0.5);
+    color: ${theme.colors.textGray};
     margin-left: 10px;
 `;
 
@@ -52,7 +53,7 @@ export const PostBody = styled.View`
 export const PostText = styled.Text`
     font-size: 10px;
     margin-bottom: 3px;
-    color: rgba(0,0,0,0.8);
+    color: ${theme.colors.textGray};
 `;
 
 export const PostImage = styled.Image`

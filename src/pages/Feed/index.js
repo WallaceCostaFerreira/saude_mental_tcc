@@ -29,6 +29,7 @@ import Comments from "../../components/Comments";
 import firebase from '../../config/Firebaseconfig';
 
 import postsDados from '../../components/Post/posts.json'
+import theme from '../../constants/theme';
 
 export default function Feed({ navigation }){
 
@@ -63,7 +64,7 @@ export default function Feed({ navigation }){
         <Container>
             <StatusBar
                 animated={true}
-                backgroundColor="#98FB98"
+                backgroundColor={theme.colors.primary}
                 hidden={false} />
             <Header>
                 <ProfileView onPress={toProfile}>
@@ -71,7 +72,7 @@ export default function Feed({ navigation }){
                         <Feather
                             name={'user'}
                             size={18}
-                            color={'#fff'}
+                            color={theme.colors.white}
                         />
                     </ProfileImg>
                     <ProfileText>Wallace Costa</ProfileText>
@@ -82,14 +83,14 @@ export default function Feed({ navigation }){
                         <Feather
                             name={'plus'}
                             size={18}
-                            color={'#fff'}
+                            color={theme.colors.white}
                         />
                     </ActionButton>
                     <ActionButton>
                         <Feather
                             name={'settings'}
                             size={18}
-                            color={'#fff'}
+                            color={theme.colors.white}
                         />
                     </ActionButton>
                     <ActionButton 
@@ -97,7 +98,7 @@ export default function Feed({ navigation }){
                         <Feather
                             name={'log-out'}
                             size={18}
-                            color={'#fff'}
+                            color={theme.colors.white}
                         />
                     </ActionButton>
                 </ActionsView>
