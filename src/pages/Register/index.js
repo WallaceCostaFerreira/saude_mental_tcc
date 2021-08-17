@@ -1,22 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
 
 import styles from "./style"
 import firebase from '../../config/Firebaseconfig';
 
-export default function SplashScreen({ navigation }){
+export default function Register({ navigation }){
 
     const [email, setEmail] = useState ("");
     const [password, setPassword] = useState ("");
     const [errorRegister, setErrorRegister] = useState("");
     const [msgError, setMsgError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const cadastroFirebase = () =>{
+        setLoading(true);
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
+            setLoading(false);
             navigation.navigate("RegisterPass2");
         })
         .catch((error) => {
@@ -24,6 +27,7 @@ export default function SplashScreen({ navigation }){
             var errorMessage = error.message;
             setErrorRegister(true);
             setMsgError(errorMessage);
+            setLoading(false);
         });
     }
 
@@ -55,8 +59,9 @@ export default function SplashScreen({ navigation }){
             <Text></Text>
             }
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.txtbutton}
-                onPress={cadastroFirebase}>Cadastrar-se</Text>
+                {loading ? <ActivityIndicator size="small" color="#fff"/>
+                : <Text style={styles.txtbutton} onPress={cadastroFirebase}>Cadastrar-se</Text> }
+
             </TouchableOpacity>
             <Text style={styles.txtCadastrar}>Já tenho cadastro, 
                 <Text 
