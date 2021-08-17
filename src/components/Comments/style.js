@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import theme from '../../constants/theme';
+
 
 export const CommentContainer = styled.View`
     flex:1;
@@ -16,7 +18,7 @@ export const CommentActionView = styled.View`
 export const CommentInput = styled.TextInput`
     width: 85%;
     height: 35px;
-    background: rgba(0,0,0,0.05);
+    background: ${theme.colors.lightGray};
     margin-top: 8px;
     padding-left: 8px;
     border-radius: 6;
@@ -27,7 +29,7 @@ export const CommentButton = styled.TouchableOpacity`
     height: 36px;
     border-radius: 17px;
     margin-top: 8px;
-    background: #98FB98;
+    background: ${theme.colors.primary};
     align-items: center;
     justify-content: center;
 `;
@@ -44,7 +46,7 @@ export const CommentScroll = styled.ScrollView`
 export const ProfileImg = styled.View`
     width:30;
     height:30;
-    background:#98FB98;
+    background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
     border-radius:15;
@@ -52,13 +54,13 @@ export const ProfileImg = styled.View`
 
 export const ProfileText = styled.Text`
     font-size: 12;
-    color: rgba(0,0,0,0.5);
+    color: ${theme.colors.textGray};
     margin-left: 10px;
 `;
 
 export const CommentTitle = styled.Text`
     font-size: 16px;
-    color: rgba(0,0,0,0.5);
+    color: ${theme.colors.textGray};
     margin-bottom: 10px;
 `;
 
@@ -67,7 +69,7 @@ export const CommentView = styled.View`
     flex-direction: row;
     padding-bottom: 10px;
     border-bottom-width:1px;
-    border-bottom-color:rgba(0,0,0,0.05);
+    border-bottom-color:${theme.colors.lightGray};
 `;
 
 export const CommentProfileView = styled.View`
@@ -83,5 +85,5 @@ export const CommentTextView = styled.View`
 export const CommentText = styled.Text`
     margin-right: 10px;
     font-size: 12px;
-    color: rgba(0,0,0,0.5);
+    color: ${theme.colors.textGray};
 `;
