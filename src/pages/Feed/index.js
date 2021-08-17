@@ -47,6 +47,10 @@ export default function Feed({ navigation }){
         navigation.navigate("Profile");
     }
 
+    const toPublish = () =>{
+        navigation.navigate("Publish");
+    }
+
     const logOut = () =>{
         firebase.auth().signOut().then(() => {
             navigation.navigate("Login");
@@ -73,7 +77,8 @@ export default function Feed({ navigation }){
                     <ProfileText>Wallace Costa</ProfileText>
                 </ProfileView>
                 <ActionsView>
-                    <ActionButton>
+                    <ActionButton
+                        onPress={toPublish}>
                         <Feather
                             name={'plus'}
                             size={18}
