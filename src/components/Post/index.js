@@ -19,6 +19,7 @@ import {
 
 
 import imgTest from '../../../assets/imgteste.jpg'
+import theme from '../../constants/theme';
 
 class Post extends Component{
     render(){
@@ -33,7 +34,7 @@ class Post extends Component{
                                 <Feather
                                     name={'user'}
                                     size={18}
-                                    color={'#fff'}
+                                    color={theme.colors.white}
                                 />
                             </ProfileImg>
                             <ProfileText>{this.props.name}</ProfileText>
@@ -44,7 +45,7 @@ class Post extends Component{
                             style={{ margin:3 }}
                             name={'more-vertical'}
                             size={14}
-                            color={'#000'}
+                            color={theme.colors.black}
                             onPress={() => onEventPropsClick()}
                         />
                     </PostHeader>
@@ -60,7 +61,7 @@ class Post extends Component{
                                 style={{ marginRight:6 }}
                                 name={'bookmark'}
                                 size={20}
-                                color={'#000'}
+                                color={theme.colors.black}
                             />
                             <PostActionText>Salvar</PostActionText>
                         </PostButton>
@@ -70,7 +71,7 @@ class Post extends Component{
                                 style={{ marginRight:6 }}
                                 name={'message-square'}
                                 size={20}
-                                color={'#000'}
+                                color={theme.colors.black}
                             />
                             <PostActionText>Comentar</PostActionText>
                         </PostButton>

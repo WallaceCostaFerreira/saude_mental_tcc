@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
-// import { StyleSheet } from 'react-native';
+import theme from '../../constants/theme';
 
 export const Container = styled.ScrollView`
     flex:1;
-    background: #FFFFFF;
+    background: ${theme.colors.white};
 `;
 
 export const Header = styled.View`
     height: 70px;
-    background: #98FB98;
+    background: ${theme.colors.primary};
     align-items: center;
     margin-bottom: 50px;
 `;
@@ -61,8 +61,8 @@ export const CommunityBody = styled.View`
 export const Communities = styled.TouchableOpacity`
     height: 20px;
     width: 100px;
-    background: #fff;
-    border-color: #98FB98;
+    background: ${theme.colors.white};
+    border-color: ${theme.colors.primary};
     border-width: 1px;
     border-radius: 25px;
     margin-bottom: 3px;

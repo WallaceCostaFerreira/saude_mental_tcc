@@ -5,5 +5,6 @@ export default theme = {
         textGray: "rgba(0,0,0,0.5)",
         white: "#fff",
         lightGray: "rgba(0,0,0,0.05)",
+        black: "#000",
     }
 };

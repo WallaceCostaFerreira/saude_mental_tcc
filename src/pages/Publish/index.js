@@ -52,7 +52,7 @@ export default function Publish({ navigation }) {
                     <Feather
                         name={'arrow-left'}
                         size={22}
-                        color={'#fff'}
+                        color={theme.colors.white}
                     />
                 </BackButton>
                 <Title>Criar publicação</Title>
@@ -61,7 +61,7 @@ export default function Publish({ navigation }) {
                         style={{visibility:none}}
                         name={'more-vertical'}
                         size={22}
-                        color={'#fff'}
+                        color={theme.colors.white}
                     /> */}
                 </BackButton>
             </Header>
@@ -82,12 +82,12 @@ export default function Publish({ navigation }) {
                             <Feather 
                                 style={{
                                     borderRightWidth:1,
-                                    borderRightColor:'#fff',
+                                    borderRightColor: theme.colors.white,
                                     paddingRight: 10
                                 }}
                                 name={"upload"}
                                 size={22}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                             <AttachmentText>Anexo</AttachmentText>
                         </AttachmentView>
@@ -99,12 +99,12 @@ export default function Publish({ navigation }) {
                             <Feather 
                                 style={{
                                     borderLeftWidth:1,
-                                    borderLeftColor:'#fff',
+                                    borderLeftColor:theme.colors.white,
                                     paddingLeft: 10
                                 }}
                                 name={"send"}
                                 size={22}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </SendView>
                     </SendButton>
