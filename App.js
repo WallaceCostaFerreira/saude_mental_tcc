@@ -8,6 +8,7 @@ import RegisterPass2 from './src/pages/Register/RegisterPass2';
 import SplashScreen from './src/pages/SplashScreen';
 import Feed from "./src/pages/Feed";
 import Profile from "./src/pages/Profile";
+import Publish from "./src/pages/Publish";
 
 const Stack = createStackNavigator()
 
@@ -45,7 +46,13 @@ export default function App() {
           name="Profile"
           component={Profile}
           options={{ headerShown:true,
+          headerTintColor:'#000',
           title:"Perfil" }}
+        />
+        <Stack.Screen 
+          name="Publish"
+          component={Publish}
+          options={{ headerShown:false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

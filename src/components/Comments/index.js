@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 
+import theme from '../../constants/theme'
+
 import {
     CommentContainer,
     CommentActionView,
@@ -27,7 +29,7 @@ class Comments extends Component{
                     <Feather
                         name={'send'}
                         size={18}
-                        color={'#fff'}
+                        color={theme.colors.white}
                     />
                 </CommentButton>
             </CommentActionView>
@@ -39,7 +41,7 @@ class Comments extends Component{
                             <Feather
                                 name={'user'}
                                 size={18}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </ProfileImg>
                         <ProfileText>Wallace Costa</ProfileText>
@@ -54,7 +56,7 @@ class Comments extends Component{
                             <Feather
                                 name={'user'}
                                 size={18}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </ProfileImg>
                         <ProfileText>Wallace Costa</ProfileText>
@@ -69,7 +71,7 @@ class Comments extends Component{
                             <Feather
                                 name={'user'}
                                 size={18}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </ProfileImg>
                         <ProfileText>Wallace Costa</ProfileText>
@@ -84,7 +86,7 @@ class Comments extends Component{
                             <Feather
                                 name={'user'}
                                 size={18}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </ProfileImg>
                         <ProfileText>Wallace Costa</ProfileText>
@@ -99,7 +101,7 @@ class Comments extends Component{
                             <Feather
                                 name={'user'}
                                 size={18}
-                                color={'#fff'}
+                                color={theme.colors.white}
                             />
                         </ProfileImg>
                         <ProfileText>Wallace Costa</ProfileText>
