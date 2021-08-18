@@ -19,13 +19,13 @@ export const ActionsView = styled.SafeAreaView`
 `;
 
 export const ActionButton = styled.TouchableOpacity`
-    width:30;
-    height:30;
+    width:30px;
+    height:30px;
     justify-content:center;
     align-items:center;
-    border-radius:15;
+    border-radius:15px;
     background:${theme.colors.primary};
-    margin-left:8;
+    margin-left:8px;
 `;
 
 export const ProfileView = styled.TouchableOpacity`
@@ -34,16 +34,16 @@ export const ProfileView = styled.TouchableOpacity`
 `;
 
 export const ProfileImg = styled.View`
-    width:30;
-    height:30;
+    width:30px;
+    height:30px;
     background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
-    border-radius:15;
+    border-radius:15px;
 `;
 
 export const ProfileText = styled.Text`
-    font-size: 12;
+    font-size: 12px;
     color: ${theme.colors.textGray};
     margin-left: 10px;
 `;
@@ -78,13 +78,13 @@ export const ReportButton = styled.TouchableOpacity`
 `;
 
 export const ReportText = styled.Text`
-    font-size: 14;
+    font-size: 14px;
     color:${theme.colors.textGray};
 `;
 
 export const ReportTextDescription = styled.Text`
     color:${theme.colors.textGray};
-    font-size:16;
+    font-size:16px;
 `;
 
 export const ReportInputDescription = styled.TextInput`

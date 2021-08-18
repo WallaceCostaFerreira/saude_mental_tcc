@@ -80,7 +80,7 @@ export const AttachmentText = styled.Text`
     color:${theme.colors.white};
     margin-right: 15px;
     font-weight: 700;
-    font-size: 16;
+    font-size: 16px;
 `;
 
 export const SendButton = styled.TouchableOpacity`
@@ -100,7 +100,7 @@ export const SendText = styled.Text`
     color:${theme.colors.white};
     margin-left: 15px;
     font-weight: 700;
-    font-size: 16;
+    font-size: 16px;
 `;
 
 export const AttachmentOptionsContainer = styled.View`
