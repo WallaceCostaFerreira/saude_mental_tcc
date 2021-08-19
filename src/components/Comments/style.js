@@ -21,7 +21,7 @@ export const CommentInput = styled.TextInput`
     background: ${theme.colors.lightGray};
     margin-top: 8px;
     padding-left: 8px;
-    border-radius: 6;
+    border-radius: 6px;
 `;
 
 export const CommentButton = styled.TouchableOpacity`
@@ -44,16 +44,16 @@ export const CommentScroll = styled.ScrollView`
 `;
 
 export const ProfileImg = styled.View`
-    width:30;
-    height:30;
+    width:30px;
+    height:30px;
     background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
-    border-radius:15;
+    border-radius:15px;
 `;
 
 export const ProfileText = styled.Text`
-    font-size: 12;
+    font-size: 12px;
     color: ${theme.colors.textGray};
     margin-left: 10px;
 `;

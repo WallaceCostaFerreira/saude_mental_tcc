@@ -25,15 +25,16 @@ export const ProfileView = styled.TouchableOpacity`
 `;
 
 export const ProfileImg = styled.Image`
-    width:30;
-    height:30;
+    width:30px;
+    height:30px;
+    background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
-    border-radius:15;
+    border-radius:15px;
 `;
 
 export const ProfileText = styled.Text`
-    font-size: 12;
+    font-size: 12px;
     color: ${theme.colors.textGray};
     margin-left: 10px;
 `;
