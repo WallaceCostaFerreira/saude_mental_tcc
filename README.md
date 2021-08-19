@@ -1,10 +1,10 @@
 # saude_mental_tcc
 
-1° Instalar o NODE
-2° Instalar o EXPO -> npm install --global expo-cli -> expo start
-3° Clonar o repositorio -> git clone https://github.com/WallaceCostaFerreira/saude_mental_tcc.git
-4° Atualizar a Master -> Git pull origin Master
-5° Baixar a branch Tester -> git checkout -b Tester
+1°) Instalar o NODE
+2°) Instalar o EXPO -> npm install --global expo-cli -> expo start
+3°) Clonar o repositorio -> git clone https://github.com/WallaceCostaFerreira/saude_mental_tcc.git
+4°) Atualizar a Master -> Git pull origin Master
+5°) Baixar a branch Tester -> git checkout -b Tester
 
 #########################################  Alertas  ##################################################################
 
