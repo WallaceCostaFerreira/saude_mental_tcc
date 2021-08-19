@@ -19,16 +19,17 @@ import {
     ReportText,
     ReportTextDescription,
     ReportInputDescription,
-    ReportActionButton } from "./style";
+    ReportActionButton 
+} from "./style";
 
 
+import firebase from '../../config/Firebaseconfig';
 
 import Posts from "../../components/Post";
 import Communities from "../../components/Communities";
 import Comments from "../../components/Comments";
-import firebase from '../../config/Firebaseconfig';
-
 import postsDados from '../../components/Post/posts.json'
+
 import theme from '../../constants/theme';
 
 export default function Feed({ navigation }){
@@ -50,6 +51,10 @@ export default function Feed({ navigation }){
 
     const toPublish = () =>{
         navigation.navigate("Publish");
+    }
+
+    const toSavePublish = () =>{
+        navigation.navigate("SavePublish");
     }
 
     const logOut = () =>{
@@ -86,9 +91,10 @@ export default function Feed({ navigation }){
                             color={theme.colors.white}
                         />
                     </ActionButton>
-                    <ActionButton>
+                    <ActionButton 
+                        onPress={toSavePublish}>
                         <Feather
-                            name={'settings'}
+                            name={'bookmark'}
                             size={18}
                             color={theme.colors.white}
                         />
@@ -106,12 +112,14 @@ export default function Feed({ navigation }){
             <Body showsVerticalScrollIndicator={false}>
                 <Communities/>
                 {postsDados && postsDados.map((post,index) =>(
-                    <Posts  name={post.name}
-                            community={post.community}
-                            textPublish={post.textPublish}
-                            photo={post.photo}
-                            onEventPropsClick={onOpenDenuncia.bind(this)}
-                            onCommentsPropsClick={onOpenComment.bind(this)}
+                    <Posts  
+                        key={index}
+                        name={post.name}
+                        community={post.community}
+                        textPublish={post.textPublish}
+                        photo={post.photo}
+                        onEventPropsClick={onOpenDenuncia.bind(this)}
+                        onCommentsPropsClick={onOpenComment.bind(this)}
                     />
                 ))}
             </Body>

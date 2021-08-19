@@ -49,10 +49,12 @@ export default function Profile() {
                     </CommunityBody>
                 </CommunityView>
                 {postsDados && postsDados.map((post,index) =>(
-                    <Posts  name={post.name}
-                            community={post.community}
-                            textPublish={post.textPublish}
-                            photo={post.photo}
+                    <Posts 
+                        key={index}
+                        name={post.name}
+                        community={post.community}
+                        textPublish={post.textPublish}
+                        photo={post.photo}
                     />
                 ))}
             </Body>
