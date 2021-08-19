@@ -14,18 +14,28 @@
 #########################################  Alertas  ####################################################
 
 1-) Sempre manter a Master atualizada
+
 2-) Sempre criar sua branch partindo da Master
 
 ########################################## Comandos Basicos do Git #####################################
 
 1-) git branch -> Mostra a brach que vc está
+
 2-) git pull origin [sua_branch] -> atualiza sua branch
+
 3-) git checkout -b [nome_da_branch] -> Cria uma branch nova
+
 4-) git add . -> adiciona todas as suas alterações a branch
+
 5-) git commit -m "comentario_sobre_suas_alterações" -> adiciona um comentario a branch
+
 6-) git push origin [nome_da_branch] -> sobe sua branch para o git
+
 7-) git fetch --all -> Permiti fazer uma sincronização com as branch remotas do git
+
 8-) git reset -> resestar suas alterações caso de tenha feito merda
+
 9-) git merge -> Mergar uma branch (Comando só será ultilizado por Lucas Gerlach)
+
 10-) git merge --abort -> aborta um merge (Comando só será ultilizado por Lucas Gerlach)
 
