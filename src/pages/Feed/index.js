@@ -52,6 +52,10 @@ export default function Feed({ navigation }){
         navigation.navigate("Publish");
     }
 
+    const toSavePublish = () =>{
+        navigation.navigate("SavePublish");
+    }
+
     const logOut = () =>{
         firebase.auth().signOut().then(() => {
             navigation.navigate("Login");
@@ -86,9 +90,10 @@ export default function Feed({ navigation }){
                             color={theme.colors.white}
                         />
                     </ActionButton>
-                    <ActionButton>
+                    <ActionButton 
+                        onPress={toSavePublish}>
                         <Feather
-                            name={'settings'}
+                            name={'bookmark'}
                             size={18}
                             color={theme.colors.white}
                         />
