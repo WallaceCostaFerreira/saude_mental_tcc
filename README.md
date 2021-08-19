@@ -6,12 +6,12 @@
 4°) Atualizar a Master -> Git pull origin Master
 5°) Baixar a branch Tester -> git checkout -b Tester
 
-#########################################  Alertas  ##################################################################
+#########################################  Alertas  ##########################
 
 1-) Sempre manter a Master atualizada
 2-) Sempre criar sua branch partindo da Master
 
-########################################## Comandos Basicos do Git ###################################################
+########################################## Comandos Basicos do Git #############
 
 1-) git branch -> Mostra a brach que vc está
 2-) git pull origin [sua_branch] -> atualiza sua branch
