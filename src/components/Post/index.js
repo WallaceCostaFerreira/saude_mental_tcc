@@ -30,13 +30,7 @@ class Post extends Component{
                 <PostView>
                     <PostHeader>
                         <ProfileView>
-                            <ProfileImg>
-                                <Feather
-                                    name={'user'}
-                                    size={18}
-                                    color={theme.colors.white}
-                                />
-                            </ProfileImg>
+                            <ProfileImg source={ imgTest } />
                             <ProfileText>{this.props.name}</ProfileText>
                         </ProfileView>
                         <PostCommunityText>{this.props.community}</PostCommunityText>
@@ -50,7 +44,17 @@ class Post extends Component{
                         />
                     </PostHeader>
                     <PostBody>
-                        <PostText>{this.props.textPublish}</PostText>
+                        <PostText>
+                            {/* {this.props.textPublish.substr(0, 100)} */}
+
+                            {this.props.textPublish.length > 100 
+                            ? `${this.props.textPublish.substr(0, 100)}`
+                            
+                            (<PostText>Ver mais...</PostText>)
+                            
+                            : 'Menos de 100' }
+                        
+                        </PostText>
                         <PostImage source={ imgTest }/>
                     </PostBody>
                     <PostActions>

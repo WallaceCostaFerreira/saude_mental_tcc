@@ -24,10 +24,9 @@ export const ProfileView = styled.TouchableOpacity`
     align-items: center;
 `;
 
-export const ProfileImg = styled.View`
+export const ProfileImg = styled.Image`
     width:30;
     height:30;
-    background:${theme.colors.primary};
     justify-content:center;
     align-items: center;
     border-radius:15;
