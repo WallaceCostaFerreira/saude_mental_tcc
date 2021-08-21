@@ -2,17 +2,17 @@
     {
         "name":"Lucas Pedro Souza",
         "community":"Depressão",
-        "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "photo":"../../../assets/imgteste.jpg"
+        "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "photo":"https://github.com/WallaceCostaFerreira.png"
     },{
         "name":"João José",
         "community":"Ansiedade",
-        "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "photo":"https://img.olhardigital.com.br/wp-content/uploads/2018/09/20180903133856-860x450.jpg"
+        "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text 1234",
+        "photo":"https://github.com/WallaceCostaFerreira.png"
     },{
         "name":"Pedro Silva",
         "community":"TDAH",
         "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "photo":"https://img.ibxk.com.br/2020/01/30/30021141299110.jpg?w=1120&h=420&mode=crop&scale=both"
+        "photo":"https://github.com/WallaceCostaFerreira.png"
     }
 ]
