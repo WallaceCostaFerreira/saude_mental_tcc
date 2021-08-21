@@ -118,7 +118,7 @@ export default function Feed({ navigation }){
                         community={post.community}
                         textPublish={post.textPublish}
                         photo={post.photo}
-                        onEventPropsClick={onOpenDenuncia.bind(this)}
+                        onReportPropsClick={onOpenDenuncia.bind(this)}
                         onCommentsPropsClick={onOpenComment.bind(this)}
                     />
                 ))}

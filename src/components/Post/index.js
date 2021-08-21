@@ -22,21 +22,31 @@ import imgTest from '../../../assets/imgteste.jpg'
 import theme from '../../constants/theme';
 
 class Post extends Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {  characteres: this.props.textPublish.length };
+
+        this.showDescription = this.showDescription.bind(this);
+    }
+
+    showDescription() {
+        this.setState(({
+            characteres: 1
+        }));
+    }
+
     render(){
-        const { onEventPropsClick } = this.props;
+
+        const { onReportPropsClick } = this.props;
         const { onCommentsPropsClick } = this.props;
+
         return (
             <FeedContainer>
                 <PostView>
                     <PostHeader>
                         <ProfileView>
-                            <ProfileImg>
-                                <Feather
-                                    name={'user'}
-                                    size={18}
-                                    color={theme.colors.white}
-                                />
-                            </ProfileImg>
+                            <ProfileImg source={ imgTest } />
                             <ProfileText>{this.props.name}</ProfileText>
                         </ProfileView>
                         <PostCommunityText>{this.props.community}</PostCommunityText>
@@ -46,17 +56,25 @@ class Post extends Component{
                             name={'more-vertical'}
                             size={14}
                             color={theme.colors.black}
-                            onPress={() => onEventPropsClick()}
+                            onPress={() => onReportPropsClick()}
                         />
                     </PostHeader>
                     <PostBody>
-                        <PostText>{this.props.textPublish}</PostText>
+                        <PostText
+                            onPress={this.showDescription}>
+                            {this.state.characteres > 110 
+                            ?   <PostText>{this.props.textPublish.substr(0, 110)}... 
+                                    <PostText 
+                                        style={{color:theme.colors.black}}>
+                                        Ver mais
+                                    </PostText>
+                                </PostText>
+                            : <PostText>{ this.props.textPublish }</PostText>}
+                        </PostText>
                         <PostImage source={ imgTest }/>
                     </PostBody>
                     <PostActions>
-                        <PostButton
-                            // onPress={() => onCommentsPropsClick()}
-                            >
+                        <PostButton>
                             <Feather
                                 style={{ marginRight:6 }}
                                 name={'bookmark'}
