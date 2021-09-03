@@ -56,6 +56,21 @@ export const TextPublish = styled.TextInput.attrs({
     textAlignVertical: top;
 `;
 
+export const AttachmentSelectedContainer = styled.ScrollView.attrs({
+})`
+    padding-left: 15px;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 10px;
+`;
+
+export const ImageSelected = styled.Image`
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+`;
+
 export const ActionView = styled.View`
     width: 90%;
     flex-direction: row;
