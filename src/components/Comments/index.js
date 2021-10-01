@@ -18,6 +18,8 @@ import {
     CommentText
 } from './style';
 
+import commentsData from '../Comments/comments.json';
+
 class Comments extends Component{
     render(){
 
@@ -35,82 +37,25 @@ class Comments extends Component{
             </CommentActionView>
             <CommentScroll>
                 <CommentTitle>Comentários</CommentTitle>
-                <CommentView>
-                    <CommentProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={theme.colors.white}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
-                    </CommentProfileView>
-                    <CommentTextView>
-                        <CommentText>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}</CommentText>
-                    </CommentTextView>
-                </CommentView>
-                <CommentView>
-                    <CommentProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={theme.colors.white}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
-                    </CommentProfileView>
-                    <CommentTextView>
-                        <CommentText>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}</CommentText>
-                    </CommentTextView>
-                </CommentView>
-                <CommentView>
-                    <CommentProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={theme.colors.white}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
-                    </CommentProfileView>
-                    <CommentTextView>
-                        <CommentText>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}</CommentText>
-                    </CommentTextView>
-                </CommentView>
-                <CommentView>
-                    <CommentProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={theme.colors.white}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
-                    </CommentProfileView>
-                    <CommentTextView>
-                        <CommentText>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}</CommentText>
-                    </CommentTextView>
-                </CommentView>
-                <CommentView>
-                    <CommentProfileView>
-                        <ProfileImg>
-                            <Feather
-                                name={'user'}
-                                size={18}
-                                color={theme.colors.white}
-                            />
-                        </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
-                    </CommentProfileView>
-                    <CommentTextView>
-                        <CommentText>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}</CommentText>
-                    </CommentTextView>
-                </CommentView>
-            </CommentScroll>
+                {commentsData && commentsData.map((commentData, index) =>(
+                    <CommentView key={index}>
+                        <CommentProfileView>
+                            <ProfileImg>
+                                <Feather
+                                    name={'user'}
+                                    size={18}
+                                    color={theme.colors.white}
+                                />
+                            </ProfileImg>
+                            <ProfileText>{commentData.nameUser}</ProfileText>
+                        </CommentProfileView>
+                        <CommentTextView>
+                            <CommentText>{commentData.comment}</CommentText>
+                        </CommentTextView>
+                    </CommentView>
+                ))}
+
+               </CommentScroll>
         </CommentContainer>
     )};
 }

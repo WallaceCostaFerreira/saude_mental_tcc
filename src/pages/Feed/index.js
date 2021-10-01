@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Component, useRef,useState } from 'react';
 import { Modalize } from 'react-native-modalize';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -32,139 +32,163 @@ import postsDados from '../../components/Post/posts.json'
 
 import theme from '../../constants/theme';
 
-export default function Feed({ navigation }){
+export default class Feed extends Component{
 
-    const denunciaRef = useRef(null);
-    const commentRef = useRef(null);
-
-    const onOpenDenuncia = () => {
-        denunciaRef.current?.open();
-    };
-
-    const onOpenComment = () => {
-        commentRef.current?.open();
-    };
-
-    const toProfile = () =>{
-        navigation.navigate("Profile");
+    constructor(props){
+        super(props);
+        this.state = {
+        }
     }
 
-    const toPublish = () =>{
-        navigation.navigate("Publish");
+    //Abre modal de denuncia
+    // onOpenDenuncia = () => {
+    //     this.denunciaRef.current?.open();
+    // };
+
+    // //Abre modal de comentários
+    // onOpenComment = () => {
+    //     this.commentRef.current?.open();
+    // };
+
+    //Vai para a tela de perfil
+    toProfile = () =>{
+        this.props.navigation.navigate("Profile");
     }
 
-    const toSavePublish = () =>{
-        navigation.navigate("SavePublish");
+    //Vai para a tela de publicação
+    toPublish = () =>{
+        this.props.navigation.navigate("Publish");
     }
 
-    const logOut = () =>{
+    //Vai para a tela de publicações salvas pelo usuário
+    toSavePublish = () =>{
+        this.props.navigation.navigate("SavePublish");
+    }
+
+    //Desloga do aplicativo
+    logOut = () =>{
         firebase.auth().signOut().then(() => {
-            navigation.navigate("Login");
+            this.props.navigation.navigate("Login");
         }).catch((error) => {
-            // An error happened.
+
         });
     }
 
-    return(
-        <Container>
-            <StatusBar
-                animated={true}
-                backgroundColor={theme.colors.primary}
-                hidden={false} />
-            <Header>
-                <ProfileView onPress={toProfile}>
-                    <ProfileImg>
-                        <Feather
-                            name={'user'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ProfileImg>
-                    <ProfileText>Wallace Costa</ProfileText>
-                </ProfileView>
-                <ActionsView>
-                    <ActionButton
-                        onPress={toPublish}>
-                        <Feather
-                            name={'plus'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                    <ActionButton 
-                        onPress={toSavePublish}>
-                        <Feather
-                            name={'bookmark'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                    <ActionButton 
-                        onPress={logOut}>
-                        <Feather
-                            name={'log-out'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                </ActionsView>
-            </Header>
-            <Body showsVerticalScrollIndicator={false}>
-                <Communities/>
-                {postsDados && postsDados.map((post,index) =>(
-                    <Posts  
-                        key={index}
-                        name={post.name}
-                        community={post.community}
-                        textPublish={post.textPublish}
-                        photo={post.photo}
-                        onReportPropsClick={onOpenDenuncia.bind(this)}
-                        onCommentsPropsClick={onOpenComment.bind(this)}
-                    />
-                ))}
-            </Body>
+    render(){
 
-            <Modalize 
-                ref={denunciaRef}
-                scrollViewProps={{ showsVerticalScrollIndicator: false }}
-                snapPoint={360}>
-                <HeaderRepostView>
-                    <ReportTextDescription>Denúncias comuns</ReportTextDescription>
-                </HeaderRepostView>
-                <ReportView>
-                    <ReportButton>
-                        <ReportText>
-                            Postagem não condiz com a comunidade.
-                        </ReportText>
-                    </ReportButton>
-                    <ReportButton>
-                        <ReportText>
-                            Postagem fere outros usuários.
-                        </ReportText>
-                    </ReportButton>
-                    <ReportButton>
-                        <ReportText>
-                            Postagem degradativa, sem ética.
-                        </ReportText>
-                    </ReportButton>
+        const denunciaRef = useRef(null);
+        const commentRef = uesRef(null);
+      
+        const onOpenDenuncia = () => {
+            denunciaRef.current?.open();
+        };
+        
+        const onOpenComment = () => {
+            commentRef.current?.open();
+        };
+        
+        return(
+            <Container>
+                <StatusBar
+                    animated={true}
+                    backgroundColor={theme.colors.primary}
+                    hidden={false} />
+                <Header>
+                    <ProfileView onPress={this.toProfile}>
+                        <ProfileImg>
+                            <Feather
+                                name={'user'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ProfileImg>
+                        <ProfileText>Wallace Costa</ProfileText>
+                    </ProfileView>
+                    <ActionsView>
+                        <ActionButton
+                            onPress={this.toPublish}>
+                            <Feather
+                                name={'plus'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                        <ActionButton 
+                            onPress={this.toSavePublish}>
+                            <Feather
+                                name={'bookmark'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                        <ActionButton 
+                            onPress={this.logOut}>
+                            <Feather
+                                name={'log-out'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                    </ActionsView>
+                </Header>
+                <Body showsVerticalScrollIndicator={false}>
+                    <Communities/>
+                    {postsDados && postsDados.map((post,index) =>(
+                        <Posts  
+                            key={index}
+                            name={post.name}
+                            community={post.community}
+                            textPublish={post.textPublish}
+                            photo={post.photo}
+                            onReportPropsClick={onOpenDenuncia.bind(this)}
+                            onCommentsPropsClick={onOpenComment.bind(this)}
+                        />
+                    ))}
+                </Body>
+    
+                <Modalize 
+                    ref={denunciaRef}
+                    scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                    snapPoint={360}>
                     <HeaderRepostView>
-                        <ReportTextDescription>Descrição</ReportTextDescription>
+                        <ReportTextDescription>Denúncias comuns</ReportTextDescription>
                     </HeaderRepostView>
-                    <ReportInputDescription
-                        multiline={true}
-                        numberOfLines={4}
-                        placeholder="Descreva o motivo da denúncia"/>
-                    <ReportActionButton>
-                        <ReportText>Enviar denúncia!</ReportText>
-                    </ReportActionButton>
-                </ReportView>
-            </Modalize>
-            <Modalize
-                ref={commentRef}
-                scrollViewProps={{ showsVerticalScrollIndicator: false }}
-                snapPoint={460}>
-                <Comments/>
-            </Modalize>
-        </Container>
-    )
+                    <ReportView>
+                        <ReportButton>
+                            <ReportText>
+                                Postagem não condiz com a comunidade.
+                            </ReportText>
+                        </ReportButton>
+                        <ReportButton>
+                            <ReportText>
+                                Postagem fere outros usuários.
+                            </ReportText>
+                        </ReportButton>
+                        <ReportButton>
+                            <ReportText>
+                                Postagem degradativa, sem ética.
+                            </ReportText>
+                        </ReportButton>
+                        <HeaderRepostView>
+                            <ReportTextDescription>Descrição</ReportTextDescription>
+                        </HeaderRepostView>
+                        <ReportInputDescription
+                            multiline={true}
+                            numberOfLines={4}
+                            placeholder="Descreva o motivo da denúncia"/>
+                        <ReportActionButton>
+                            <ReportText>Enviar denúncia!</ReportText>
+                        </ReportActionButton>
+                    </ReportView>
+                </Modalize>
+                <Modalize
+                    ref={commentRef}
+                    scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                    snapPoint={460}>
+                    <Comments/>
+                </Modalize>
+            </Container>
+        )
+    }
+    
 }

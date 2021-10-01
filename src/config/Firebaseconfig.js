@@ -1,5 +1,5 @@
 import firebase from "firebase";
-// import 'firebase/storage';
+import "firebase/firestore";
 
 var firebaseConfig = {
     apiKey: "AIzaSyB1sc9ssdPNGxiHRKacF9G7tuuHiH06-wo",
@@ -11,7 +11,10 @@ var firebaseConfig = {
     measurementId: "G-QZJGL18KHZ"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
+const initFirebase = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore(initFirebase);
+
+export const ConfigurationsRef = db.collection("Communities"); 
+export const UsersRef = db.collection("Users");
 
 export default firebase;

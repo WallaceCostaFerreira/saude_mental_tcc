@@ -42,23 +42,22 @@ const styles = StyleSheet.create({
     },txtlink:{
         color:'#7E62FC',
     },CommunityCheckbox:{
-        flexDirection: "row",
+        width: '100%',
+        padding: 10,
+        alignItems:'center',
+        justifyContent:'center',
         marginBottom:8,
+        flexWrap:'wrap',
     },checkboxContainer:{
         flexDirection: "row",
         marginLeft:8,
         marginRight:8,
-        borderWidth:1,
-        borderRadius:30,
-        borderColor:'#ABABAB'
+        alignItems: "center",
+        justifyContent: 'flex-end'
     },checkbox:{
-        alignSelf: "center",
-        width:10,
-        height:10,
     }, txtCommunity:{
-        fontSize:10,
+        fontSize:14,
         color:'#ABABAB',
-        marginLeft: 20,
         margin: 5,
     }
 });

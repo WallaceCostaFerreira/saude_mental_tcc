@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Modalize } from 'react-native-modalize';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
 
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -34,11 +34,12 @@ export default function Publish({ navigation }) {
     const attachmentOptionsRef = useRef(null);
     const [selectedValue, setSelectedValue] = useState("java");
     
-
+    //Chama modal de opçõpes de anexo
     const onAttachmentOptions = () => {
         attachmentOptionsRef.current?.open();
     };
 
+    //Volta para a tela de Feed
     const toFeed = () =>{
         navigation.navigate("Feed");
     }
