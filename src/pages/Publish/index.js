@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Platform } from 'react-native';
 import { Modalize } from 'react-native-modalize';
-import ImagePicker from 'react-native-image-picker';
 
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import theme from '../../constants/theme';
+import { MediaType } from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 
 
 import {
@@ -16,6 +18,8 @@ import {
     Subtitle,
     PickerCommunity,
     TextPublish,
+    AttachmentSelectedContainer,
+    ImageSelected,
     ActionView,
     AttachmentButton,
     AttachmentView,
@@ -29,11 +33,12 @@ import {
     ViewLine
 } from './style'
 
-export default function Publish({ navigation }) {
+export default function Publish({ route,navigation }) {
+    const [imageArr, setImageArr] = useState([]);
 
+    const dataImages = route.params?.data;
     const attachmentOptionsRef = useRef(null);
-    const [selectedValue, setSelectedValue] = useState("java");
-    
+    const [selectedValue, setSelectedValue] = useState("");
 
     const onAttachmentOptions = () => {
         attachmentOptionsRef.current?.open();
@@ -41,6 +46,47 @@ export default function Publish({ navigation }) {
 
     const toFeed = () =>{
         navigation.navigate("Feed");
+    }
+
+    
+    useEffect(() => {
+        if(dataImages){
+            dataImages.map(function(image, index){
+                setImageArr([...imageArr,image.uri]);
+                return true;
+            });
+        }
+    }, [dataImages])
+
+    const toCamera = async () =>{
+
+        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+        
+        if (permissionResult.granted === false) {
+            alert("Permissão necessária!");
+            return;
+        }
+
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            quality: 1,
+            videoMaxDuration: 120,
+        });
+
+        if (!result.cancelled) {
+            setImageArr([...imageArr, result.uri]);
+        }
+    }
+
+    const toGalleryImage = () =>{
+        navigation.navigate("Gallery",{type:MediaType.photo});
+        attachmentOptionsRef.current?.close();
+    }
+
+    const toGalleryVideo = () =>{
+        navigation.navigate("Gallery",{type:MediaType.video});
+        attachmentOptionsRef.current?.close();
     }
 
     return (
@@ -75,6 +121,17 @@ export default function Publish({ navigation }) {
                     <PickerCommunity.Item label="TDAH" value="TDAH"/>
                 </PickerCommunity>
                 <TextPublish/>
+                <AttachmentSelectedContainer
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{paddingRight: 15}}
+                >
+                    {imageArr && 
+                        imageArr.map(function(image2,index){
+                            return(<ImageSelected key={index} source={{ uri: image2 }}/>)
+                        })
+                    }
+                </AttachmentSelectedContainer>
                 <ActionView>
                     <AttachmentButton
                         onPress={onAttachmentOptions}>
@@ -110,19 +167,17 @@ export default function Publish({ navigation }) {
                     </SendButton>
                 </ActionView>
             </Body>
-
-            
-
         </Container>
         <Modalize
             ref={attachmentOptionsRef}
             scrollViewProps={{ showsVerticalScrollIndicator: false }}
             snapPoint={400}
             modalHeight={400}>
-        {/* Verificar se pode virar um componente a ser reutilizado */}
+            {/* Verificar se pode virar um componente a ser reutilizado */}
         
             <AttachmentOptionsContainer>
-                <AttachmentOptionButton>
+                <AttachmentOptionButton
+                    onPress={toCamera}>
                     <Feather
                         name={"camera"}
                         size={22}
@@ -136,7 +191,8 @@ export default function Publish({ navigation }) {
                     />
                 </AttachmentOptionButton>
                 <ViewLine/>
-                <AttachmentOptionButton>
+                <AttachmentOptionButton
+                    onPress={toGalleryImage}>
                     <Feather
                         name={"image"}
                         size={22}
@@ -150,7 +206,8 @@ export default function Publish({ navigation }) {
                     />
                 </AttachmentOptionButton>
                 <ViewLine/>
-                <AttachmentOptionButton>
+                <AttachmentOptionButton
+                    onPress={toGalleryVideo}>
                     <Feather
                         name={"video"}
                         size={22}
