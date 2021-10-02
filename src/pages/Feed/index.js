@@ -32,6 +32,61 @@ import postsDados from '../../components/Post/posts.json'
 
 import theme from '../../constants/theme';
 
+
+const onOpenDenuncia = () => {
+    const denunciaRef = useRef<Modalize>(null);
+    
+    return <Modalize 
+                ref={denunciaRef}
+                scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                snapPoint={360}>
+                <HeaderRepostView>
+                    <ReportTextDescription>Denúncias comuns</ReportTextDescription>
+                </HeaderRepostView>
+                <ReportView>
+                    <ReportButton>
+                        <ReportText>
+                            Postagem não condiz com a comunidade.
+                        </ReportText>
+                    </ReportButton>
+                    <ReportButton>
+                        <ReportText>
+                            Postagem fere outros usuários.
+                        </ReportText>
+                    </ReportButton>
+                    <ReportButton>
+                        <ReportText>
+                            Postagem degradativa, sem ética.
+                        </ReportText>
+                    </ReportButton>
+                    <HeaderRepostView>
+                        <ReportTextDescription>Descrição</ReportTextDescription>
+                    </HeaderRepostView>
+                    <ReportInputDescription
+                        multiline={true}
+                        numberOfLines={4}
+                        placeholder="Descreva o motivo da denúncia"/>
+                    <ReportActionButton>
+                        <ReportText>Enviar denúncia!</ReportText>
+                    </ReportActionButton>
+                </ReportView>
+            </Modalize>;
+};
+
+const onOpenComment = () => {
+    
+    const commentRef = useRef<Modalize>(null);
+
+    commentRef.current?.open()
+
+    return <Modalize
+        ref={commentRef}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
+        snapPoint={460}>
+        <Comments/>
+    </Modalize>
+}
+
 export default class Feed extends Component{
 
     constructor(props){
@@ -39,16 +94,6 @@ export default class Feed extends Component{
         this.state = {
         }
     }
-
-    //Abre modal de denuncia
-    // onOpenDenuncia = () => {
-    //     this.denunciaRef.current?.open();
-    // };
-
-    // //Abre modal de comentários
-    // onOpenComment = () => {
-    //     this.commentRef.current?.open();
-    // };
 
     //Vai para a tela de perfil
     toProfile = () =>{
@@ -75,17 +120,6 @@ export default class Feed extends Component{
     }
 
     render(){
-
-        const denunciaRef = useRef(null);
-        const commentRef = uesRef(null);
-      
-        const onOpenDenuncia = () => {
-            denunciaRef.current?.open();
-        };
-        
-        const onOpenComment = () => {
-            commentRef.current?.open();
-        };
         
         return(
             <Container>
@@ -145,48 +179,6 @@ export default class Feed extends Component{
                         />
                     ))}
                 </Body>
-    
-                <Modalize 
-                    ref={denunciaRef}
-                    scrollViewProps={{ showsVerticalScrollIndicator: false }}
-                    snapPoint={360}>
-                    <HeaderRepostView>
-                        <ReportTextDescription>Denúncias comuns</ReportTextDescription>
-                    </HeaderRepostView>
-                    <ReportView>
-                        <ReportButton>
-                            <ReportText>
-                                Postagem não condiz com a comunidade.
-                            </ReportText>
-                        </ReportButton>
-                        <ReportButton>
-                            <ReportText>
-                                Postagem fere outros usuários.
-                            </ReportText>
-                        </ReportButton>
-                        <ReportButton>
-                            <ReportText>
-                                Postagem degradativa, sem ética.
-                            </ReportText>
-                        </ReportButton>
-                        <HeaderRepostView>
-                            <ReportTextDescription>Descrição</ReportTextDescription>
-                        </HeaderRepostView>
-                        <ReportInputDescription
-                            multiline={true}
-                            numberOfLines={4}
-                            placeholder="Descreva o motivo da denúncia"/>
-                        <ReportActionButton>
-                            <ReportText>Enviar denúncia!</ReportText>
-                        </ReportActionButton>
-                    </ReportView>
-                </Modalize>
-                <Modalize
-                    ref={commentRef}
-                    scrollViewProps={{ showsVerticalScrollIndicator: false }}
-                    snapPoint={460}>
-                    <Comments/>
-                </Modalize>
             </Container>
         )
     }

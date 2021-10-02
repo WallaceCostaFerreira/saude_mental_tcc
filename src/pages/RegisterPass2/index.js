@@ -33,6 +33,7 @@ export default class RegisterPass2 extends Component{
 
         let comunidades = []
         ConfigurationsRef.get().then((querySnapshot) => {
+            
             querySnapshot.forEach((doc) => {
                 comunidades.push(doc.data())
             });
