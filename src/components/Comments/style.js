@@ -73,8 +73,10 @@ export const CommentView = styled.View`
 `;
 
 export const CommentProfileView = styled.View`
+    width: 20%;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 `;
 
 export const CommentTextView = styled.View`
