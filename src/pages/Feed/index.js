@@ -1,4 +1,4 @@
-import React, { Component, useRef,useState } from 'react';
+import React, { Component, useRef, useState } from 'react';
 import { Modalize } from 'react-native-modalize';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -32,11 +32,44 @@ import postsDados from '../../components/Post/posts.json'
 
 import theme from '../../constants/theme';
 
+function PostModals() {
 
-const onOpenDenuncia = () => {
-    const denunciaRef = useRef<Modalize>(null);
-    
-    return <Modalize 
+    //Modals dos posts
+    const denunciaRef = useRef(null);
+    const commentRef = useRef(null);
+
+    function onOpenComment(){
+        commentRef.current?.open();
+    }
+
+    const onOpenDenuncia = () => {
+        denunciaRef.current?.open();
+    }
+
+    return (
+        <>
+            <Body showsVerticalScrollIndicator={false}>
+                <Communities/>
+                {postsDados && postsDados.map((post,index) =>(
+                    <Posts  
+                        key={index}
+                        name={post.name}
+                        community={post.community}
+                        textPublish={post.textPublish}
+                        photo={post.photo}
+                        onReportPropsClick={onOpenDenuncia}
+                        onCommentsPropsClick={onOpenComment}
+                    />
+                ))}
+            </Body>
+            <Modalize
+                ref={commentRef}
+                scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                snapPoint={460}>
+                <Comments/>
+            </Modalize>
+
+            <Modalize 
                 ref={denunciaRef}
                 scrollViewProps={{ showsVerticalScrollIndicator: false }}
                 snapPoint={360}>
@@ -70,22 +103,11 @@ const onOpenDenuncia = () => {
                         <ReportText>Enviar denúncia!</ReportText>
                     </ReportActionButton>
                 </ReportView>
-            </Modalize>;
-};
-
-const onOpenComment = () => {
-    
-    const commentRef = useRef<Modalize>(null);
-
-    commentRef.current?.open()
-
-    return <Modalize
-        ref={commentRef}
-        scrollViewProps={{ showsVerticalScrollIndicator: false }}
-        snapPoint={460}>
-        <Comments/>
-    </Modalize>
+            </Modalize>
+        </>
+    )
 }
+
 
 export default class Feed extends Component{
 
@@ -165,20 +187,9 @@ export default class Feed extends Component{
                         </ActionButton>
                     </ActionsView>
                 </Header>
-                <Body showsVerticalScrollIndicator={false}>
-                    <Communities/>
-                    {postsDados && postsDados.map((post,index) =>(
-                        <Posts  
-                            key={index}
-                            name={post.name}
-                            community={post.community}
-                            textPublish={post.textPublish}
-                            photo={post.photo}
-                            onReportPropsClick={onOpenDenuncia.bind(this)}
-                            onCommentsPropsClick={onOpenComment.bind(this)}
-                        />
-                    ))}
-                </Body>
+
+                <PostModals/>
+
             </Container>
         )
     }
