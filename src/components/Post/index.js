@@ -40,6 +40,7 @@ class Post extends Component{
 
         const { onReportPropsClick } = this.props;
         const { onCommentsPropsClick } = this.props;
+        const { savePublications } = this.props;
 
         return (
             <FeedContainer>
@@ -74,7 +75,8 @@ class Post extends Component{
                         <PostImage source={ imgTest }/>
                     </PostBody>
                     <PostActions>
-                        <PostButton>
+                        <PostButton
+                            onPress={() => savePublications()}>
                             <Feather
                                 style={{ marginRight:6 }}
                                 name={'bookmark'}
