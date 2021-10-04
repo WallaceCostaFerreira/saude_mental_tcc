@@ -44,6 +44,7 @@ export default function Publish({ route,navigation }) {
         attachmentOptionsRef.current?.open();
     };
 
+    //Volta para a tela de Feed
     const toFeed = () =>{
         navigation.navigate("Feed");
     }

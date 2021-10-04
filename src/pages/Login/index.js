@@ -1,97 +1,113 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect } from 'react';
-import { ActivityIndicator ,KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
+import React, { Component } from 'react';
+import { 
+    ActivityIndicator ,
+    KeyboardAvoidingView, 
+    TextInput, 
+    TouchableOpacity, 
+    Text 
+} from 'react-native';
+import { getAuth } from "firebase/auth";
 
 import styles from "./style"
 import firebase from '../../config/Firebaseconfig';
 
-export default function Login({ navigation }){
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorLogin, setErrorLogin] = useState("");
-    const [msgError, setMsgError] = useState("");
-    const [loading, setLoading] = useState(false);
+export default class Login extends Component{
 
-    const loginFirebase = () =>{
-        setLoading(true);
-        firebase.auth().signInWithEmailAndPassword(email, password)
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            errorLogin: false,
+            msgError: '',
+            loading: false
+        }
+    }
+
+
+    //Faz login no firebase
+    loginFirebase = () =>{
+        this.setState({loading:true});
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
-            setLoading(false);
-            navigation.navigate("Feed");
+            this.setState({loading:false});
+            this.props.navigation.navigate("Feed");
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            setErrorLogin(true);
-            setMsgError(errorMessage);
-            setLoading(false);
+            this.setState({
+                errorLogin: true,
+                msgError: errorMessage,
+                loading:false
+            });
         });
     }
 
-    useEffect(()=>{
-        setLoading(true);
-        firebase.auth().onAuthStateChanged((user) => {
+    //Método que roda na montagem da tela
+    componentDidMount (){
+        this.setState({loading:true});
+        var unsubscribe = firebase.auth().onAuthStateChanged((user) =>{
             if (user) {
-                setLoading(false);
-                navigation.navigate("Feed",{idUser:user.uid});
+                this.setState({loading:false});
+                this.props.navigation.navigate("Feed",{idUser:user.uid});
+                console.log('LOGADO');
             }else{
-                setLoading(false);
+                this.setState({loading:false});
+                console.log('NAO LOGADO');
+        
+                unsubscribe();
             }
-        });
-    },[])
 
-    function toRegister(){
-        navigation.navigate("Register");
+        });
+    }
+
+    //Vai para a tela de registro
+    toRegister = () => {
+        this.props.navigation.navigate("Register");
     }
 
     
-
-    return(
-        <KeyboardAvoidingView style={styles.container}>
-            
-            <Text style={styles.title}>Saúde Mental</Text>
-            <TextInput 
-                style={styles.input}
-                type="text"
-                placeholder="Enter your e-mail"
-                value={email}
-                onChangeText={(text)=>setEmail(text)}/>
-            <TextInput 
-                style={styles.input}
-                type="text"
-                placeholder="Enter a password"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={(text)=>setPassword(text)}
-            />
-            {errorLogin === true ? 
-            <Text 
-                style={styles.msgError}>{msgError}</Text>
+    render(){
+        return(
+            <KeyboardAvoidingView style={styles.container}>
                 
-            :
-            <Text></Text>
-            }
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={loginFirebase}>
-                {loading 
-                ? <ActivityIndicator size="small" color="#fff"/> 
-                : <Text style={styles.txtbutton}>Logar</Text>}
-                
-            </TouchableOpacity>
-            <Text style={styles.txtCadastrar}>Não tenho cadastro, 
-                <Text 
-                    style={styles.txtlink}
-                    onPress={toRegister}> cadastrar-se!
+                <Text style={styles.title}>Saúde Mental</Text>
+                <TextInput 
+                    style={styles.input}
+                    type="text"
+                    placeholder="Enter your e-mail"
+                    value={this.state.email}
+                    onChangeText={(text)=>this.setState({email: text})}/>
+                <TextInput 
+                    style={styles.input}
+                    type="text"
+                    placeholder="Enter a password"
+                    secureTextEntry={true}
+                    value={this.state.password}
+                    onChangeText={(text)=>this.setState({password: text})}
+                />
+                {this.state.errorLogin && <Text style={styles.msgError}>{this.state.msgError}</Text> }
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={() => this.loginFirebase()}>
+                    {this.state.loading 
+                    ? <ActivityIndicator size="small" color="#fff"/> 
+                    : <Text style={styles.txtbutton}>Logar</Text>}
+                    
+                </TouchableOpacity>
+                <Text style={styles.txtCadastrar}>Não tenho cadastro, 
+                    <Text 
+                        style={styles.txtlink}
+                        onPress={() => this.toRegister()}> cadastrar-se!
+                    </Text>
                 </Text>
-            </Text>
-
-            
-            
-        </KeyboardAvoidingView>
-    )
+            </KeyboardAvoidingView>
+        )
+    }
 }
 

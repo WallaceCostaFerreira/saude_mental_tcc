@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Component, useRef, useState } from 'react';
 import { Modalize } from 'react-native-modalize';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -32,83 +32,22 @@ import postsDados from '../../components/Post/posts.json'
 
 import theme from '../../constants/theme';
 
-export default function Feed({ navigation }){
+function PostModals() {
 
+    //Modals dos posts
     const denunciaRef = useRef(null);
     const commentRef = useRef(null);
 
+    function onOpenComment(){
+        commentRef.current?.open();
+    }
+
     const onOpenDenuncia = () => {
         denunciaRef.current?.open();
-    };
-
-    const onOpenComment = () => {
-        commentRef.current?.open();
-    };
-
-    const toProfile = () =>{
-        navigation.navigate("Profile");
     }
 
-    const toPublish = () =>{
-        navigation.navigate("Publish");
-    }
-
-    const toSavePublish = () =>{
-        navigation.navigate("SavePublish");
-    }
-
-    const logOut = () =>{
-        firebase.auth().signOut().then(() => {
-            navigation.navigate("Login");
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
-
-    return(
-        <Container>
-            <StatusBar
-                animated={true}
-                backgroundColor={theme.colors.primary}
-                hidden={false} />
-            <Header>
-                <ProfileView onPress={toProfile}>
-                    <ProfileImg>
-                        <Feather
-                            name={'user'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ProfileImg>
-                    <ProfileText>Wallace Costa</ProfileText>
-                </ProfileView>
-                <ActionsView>
-                    <ActionButton
-                        onPress={toPublish}>
-                        <Feather
-                            name={'plus'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                    <ActionButton 
-                        onPress={toSavePublish}>
-                        <Feather
-                            name={'bookmark'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                    <ActionButton 
-                        onPress={logOut}>
-                        <Feather
-                            name={'log-out'}
-                            size={18}
-                            color={theme.colors.white}
-                        />
-                    </ActionButton>
-                </ActionsView>
-            </Header>
+    return (
+        <>
             <Body showsVerticalScrollIndicator={false}>
                 <Communities/>
                 {postsDados && postsDados.map((post,index) =>(
@@ -118,11 +57,17 @@ export default function Feed({ navigation }){
                         community={post.community}
                         textPublish={post.textPublish}
                         photo={post.photo}
-                        onReportPropsClick={onOpenDenuncia.bind(this)}
-                        onCommentsPropsClick={onOpenComment.bind(this)}
+                        onReportPropsClick={onOpenDenuncia}
+                        onCommentsPropsClick={onOpenComment}
                     />
                 ))}
             </Body>
+            <Modalize
+                ref={commentRef}
+                scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                snapPoint={460}>
+                <Comments/>
+            </Modalize>
 
             <Modalize 
                 ref={denunciaRef}
@@ -159,12 +104,94 @@ export default function Feed({ navigation }){
                     </ReportActionButton>
                 </ReportView>
             </Modalize>
-            <Modalize
-                ref={commentRef}
-                scrollViewProps={{ showsVerticalScrollIndicator: false }}
-                snapPoint={460}>
-                <Comments/>
-            </Modalize>
-        </Container>
+        </>
     )
+}
+
+
+export default class Feed extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+        }
+    }
+
+    //Vai para a tela de perfil
+    toProfile = () =>{
+        this.props.navigation.navigate("Profile");
+    }
+
+    //Vai para a tela de publicação
+    toPublish = () =>{
+        this.props.navigation.navigate("Publish");
+    }
+
+    //Vai para a tela de publicações salvas pelo usuário
+    toSavePublish = () =>{
+        this.props.navigation.navigate("SavePublish");
+    }
+
+    //Desloga do aplicativo
+    logOut = () =>{
+        firebase.auth().signOut().then(() => {
+            this.props.navigation.navigate("Login");
+        }).catch((error) => {
+
+        });
+    }
+
+    render(){
+        
+        return(
+            <Container>
+                <StatusBar
+                    animated={true}
+                    backgroundColor={theme.colors.primary}
+                    hidden={false} />
+                <Header>
+                    <ProfileView onPress={this.toProfile}>
+                        <ProfileImg>
+                            <Feather
+                                name={'user'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ProfileImg>
+                        <ProfileText>Wallace Costa</ProfileText>
+                    </ProfileView>
+                    <ActionsView>
+                        <ActionButton
+                            onPress={this.toPublish}>
+                            <Feather
+                                name={'plus'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                        <ActionButton 
+                            onPress={this.toSavePublish}>
+                            <Feather
+                                name={'bookmark'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                        <ActionButton 
+                            onPress={this.logOut}>
+                            <Feather
+                                name={'log-out'}
+                                size={18}
+                                color={theme.colors.white}
+                            />
+                        </ActionButton>
+                    </ActionsView>
+                </Header>
+
+                <PostModals/>
+
+            </Container>
+        )
+    }
+    
 }
