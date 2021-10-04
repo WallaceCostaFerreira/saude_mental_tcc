@@ -10,6 +10,7 @@ import Feed from "./src/pages/Feed";
 import Profile from "./src/pages/Profile";
 import Publish from "./src/pages/Publish";
 import SavePublish from "./src/pages/SavePublish";
+import Gallery from "./src/pages/Gallery";
 
 const Stack = createStackNavigator()
 
@@ -58,6 +59,11 @@ export default function App() {
         <Stack.Screen 
           name="SavePublish"
           component={SavePublish}
+          options={{ headerShown:false }}
+        />
+        <Stack.Screen 
+          name="Gallery"
+          component={Gallery}
           options={{ headerShown:false }}
         />
       </Stack.Navigator>
