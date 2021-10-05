@@ -75,16 +75,18 @@ class Post extends Component{
                         <PostImage source={ imgTest }/>
                     </PostBody>
                     <PostActions>
-                        <PostButton
-                            onPress={() => savePublications()}>
-                            <Feather
-                                style={{ marginRight:6 }}
-                                name={'bookmark'}
-                                size={20}
-                                color={theme.colors.black}
-                            />
-                            <PostActionText>Salvar</PostActionText>
-                        </PostButton>
+                        {this.props.saveText &&
+                            <PostButton
+                                onPress={() => savePublications()}>
+                                <Feather
+                                    style={{ marginRight:6 }}
+                                    name={'bookmark'}
+                                    size={20}
+                                    color={theme.colors.black}
+                                />
+                                <PostActionText>{this.props.saveText}</PostActionText>
+                            </PostButton>
+                        }
                         <PostButton
                             onPress={() => onCommentsPropsClick()}>
                             <Feather

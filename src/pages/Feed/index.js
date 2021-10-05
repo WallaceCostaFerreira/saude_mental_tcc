@@ -98,7 +98,7 @@ export default class Feed extends Component{
 
     //Vai para a tela de publicações salvas pelo usuário
     toSavePublish = () =>{
-        this.props.navigation.navigate("SavePublish");
+        this.props.navigation.navigate("SavePublish",{uidUser: this.state.uidUser});
     }
 
     //Desloga do aplicativo
@@ -131,6 +131,9 @@ export default class Feed extends Component{
     //Denunciar postagem
     sendReport = () => {
         console.log("ENVIADO DENUNCIA PARA "+this.state.idForReport+" - "+this.state.reportDescription);
+        
+        this.reportRef.current.close();
+        Toast.show("Denúncia enviada!",ToastAndroid.SHORT);
     }
     
     render(){
@@ -191,6 +194,7 @@ export default class Feed extends Component{
                             photo={post.photo}
                             onReportPropsClick={() => this.onOpenReport(post.idPublication)}
                             onCommentsPropsClick={this.onOpenComment}
+                            saveText="Salvar"
                             savePublications={() => this.savePublication(post.idPublication)}
                         />
                     ))}
