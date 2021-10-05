@@ -101,3 +101,52 @@ export const ReportActionButton = styled.TouchableOpacity`
     margin-top: 10px;
     border-radius: 20px;
 `;
+
+
+export const CommentContainer = styled.View`
+    flex:1;
+`;
+
+export const CommentActionView = styled.View`
+    flex-direction: row;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    justify-content: space-between;
+    height: 50px;
+`;
+
+export const CommentInput = styled.TextInput`
+    width: 85%;
+    height: 35px;
+    background: ${theme.colors.lightGray};
+    margin-top: 8px;
+    padding-left: 8px;
+    border-radius: 6px;
+`;
+
+export const CommentButton = styled.TouchableOpacity`
+    width: 36px;
+    height: 36px;
+    border-radius: 17px;
+    margin-top: 8px;
+    background: ${theme.colors.primary};
+    align-items: center;
+    justify-content: center;
+`;
+
+export const CommentScroll = styled.ScrollView`
+    flex-direction: row;
+    border-top-width: 1px;
+    border-top-color: rgba(0,0,0,0.1);
+    padding-top:10px;
+    margin: 10px;
+    height: 80%;
+`;
+
+
+export const CommentTitle = styled.Text`
+    font-size: 16px;
+    color: ${theme.colors.textGray};
+    margin-bottom: 10px;
+`;
