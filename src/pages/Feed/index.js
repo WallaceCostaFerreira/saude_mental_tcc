@@ -46,11 +46,23 @@ export default class Feed extends Component{
         super(props);
         this.state = {
             uidUser: this.props.route.params.idUser,
-            idForReport: ''
+            idForReport: '',
+            username: '',
+            reportDescription: ''
         }
     }
     commentRef = React.createRef();
     reportRef = React.createRef();
+
+    //Monta tela de feed
+    componentDidMount = () => {
+        UsersRef.doc(this.state.uidUser).get().then((querySnapshot)=>{
+            this.setState({username: querySnapshot.data().name})
+            console.log('Sucesso ao puxar infos do usuário!');
+        }).catch((error) => {
+            console.log('Erro ao pegar dados usuário - '+error);
+        })
+    }
     
     //Abre modal de comentários
     onOpenComment = () => {
@@ -118,7 +130,7 @@ export default class Feed extends Component{
 
     //Denunciar postagem
     sendReport = () => {
-        console.log("ENVIADO DENUNCIA PARA "+this.state.idForReport);
+        console.log("ENVIADO DENUNCIA PARA "+this.state.idForReport+" - "+this.state.reportDescription);
     }
     
     render(){
@@ -138,7 +150,7 @@ export default class Feed extends Component{
                                 color={theme.colors.white}
                             />
                         </ProfileImg>
-                        <ProfileText>Wallace Costa</ProfileText>
+                        <ProfileText>{this.state.username}</ProfileText>
                     </ProfileView>
                     <ActionsView>
                         <ActionButton
@@ -222,17 +234,20 @@ export default class Feed extends Component{
                         <ReportTextDescription>Denúncias comuns</ReportTextDescription>
                     </HeaderRepostView>
                     <ReportView>
-                        <ReportButton>
+                        <ReportButton
+                            onPress={() => this.setState({reportDescription:"Postagem não condiz com a comunidade."})}>
                             <ReportText>
                                 Postagem não condiz com a comunidade.
                             </ReportText>
                         </ReportButton>
-                        <ReportButton>
+                        <ReportButton
+                            onPress={() => this.setState({reportDescription:"Postagem fere outros usuários."})}>
                             <ReportText>
                                 Postagem fere outros usuários.
                             </ReportText>
                         </ReportButton>
-                        <ReportButton>
+                        <ReportButton
+                            onPress={() => this.setState({reportDescription:"Postagem degradativa, sem ética."})}>
                             <ReportText>
                                 Postagem degradativa, sem ética.
                             </ReportText>
@@ -241,6 +256,8 @@ export default class Feed extends Component{
                             <ReportTextDescription>Descrição</ReportTextDescription>
                         </HeaderRepostView>
                         <ReportInputDescription
+                            onChangeText={(text) => this.setState({reportDescription: text})}
+                            value={this.state.reportDescription}
                             multiline={true}
                             numberOfLines={4}
                             placeholder="Descreva o motivo da denúncia"/>
