@@ -3,16 +3,19 @@
         "name":"Lucas Pedro Souza",
         "community":"Depressão",
         "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "photo":"https://github.com/WallaceCostaFerreira.png"
+        "photo":"https://github.com/WallaceCostaFerreira.png",
+        "idPublication":"P1"
     },{
         "name":"João José",
         "community":"Ansiedade",
         "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text 1234",
-        "photo":"https://github.com/WallaceCostaFerreira.png"
+        "photo":"https://github.com/WallaceCostaFerreira.png",
+        "idPublication":"P2"
     },{
         "name":"Pedro Silva",
         "community":"TDAH",
         "textPublish":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "photo":"https://github.com/WallaceCostaFerreira.png"
+        "photo":"https://github.com/WallaceCostaFerreira.png",
+        "idPublication":"P3"
     }
 ]
