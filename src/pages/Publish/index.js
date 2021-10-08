@@ -7,6 +7,10 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import theme from '../../constants/theme';
 import { MediaType } from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
+import * as firebase from "firebase";
+import uuid from "uuid";
+import * as DocumentPicker from 'expo-document-picker';
+
 
 
 import {
@@ -35,9 +39,13 @@ import {
 
 export default function Publish({ route,navigation }) {
     const [imageArr, setImageArr] = useState([]);
+    const [selectedFiles, AddSelectedFile] = useState([]);
+    const [fileUrls, setFileUrls] = useState([]);
+
 
     const dataImages = route.params?.data;
     const attachmentOptionsRef = useRef(null);
+    const sendRef = useRef(null);
     const [selectedValue, setSelectedValue] = useState("");
 
     const onAttachmentOptions = () => {
@@ -49,10 +57,45 @@ export default function Publish({ route,navigation }) {
         navigation.navigate("Feed");
     }
 
+    const onSend = () => {
+        
+        selectedFiles.forEach(element => {
+            uploadFile(element)
+                .then(firebaseUrl => {
+                    alert("Sucesso!! URL: " + firebaseUrl);
+
+                    setFileUrls([...fileUrls, firebaseUrl]);
+                })
+                .catch((error) => {
+                    alert("uploadFile: " + error);
+                });
+        });
+
+        console.log(fileUrls);
+    }
+
+    uploadFile = async (file) => {
+        const response = await fetch(file.uri);
+        const blob = await response.blob();
+
+        var ref = firebase.storage().ref().child(file.folder +"/"+ uuid.v1() +"_"+ file.filename);
+        return ref.put(blob);
+    }
     
     useEffect(() => {
         if(dataImages){
             dataImages.map(function(image, index){
+
+                let fileObj = { 
+                    uri: image.uri, 
+                    filename: image.filename,
+                    folder: 'media'
+                };
+
+                console.log(fileObj);
+
+                AddSelectedFile([...selectedFiles,fileObj]);
+
                 setImageArr([...imageArr,image.uri]);
                 return true;
             });
@@ -76,7 +119,24 @@ export default function Publish({ route,navigation }) {
         });
 
         if (!result.cancelled) {
+
+            const getFileName = s => s.includes('/') && s.substr(s.lastIndexOf('/') + 1).split(' ')[0];
+
+            console.log(getFileName('file:///data/user/0/host.exp.exponent/cache/ExperienceData/UNVERIFIED-192.168.1.239-saude_mental_tcc/ImagePicker/9015cf02-221a-478d-bcbb-1bc7f806b1bf.jpg'));
+
+            let fileObj = { 
+                uri: result.uri, 
+                filename: getFileName(result.uri),
+                folder: 'media'
+            };
+
+            console.log(result);
+            console.log(fileObj);
+
+            AddSelectedFile([...selectedFiles,fileObj]);
+
             setImageArr([...imageArr, result.uri]);
+
         }
     }
 
@@ -88,6 +148,26 @@ export default function Publish({ route,navigation }) {
     const toGalleryVideo = () =>{
         navigation.navigate("Gallery",{type:MediaType.video});
         attachmentOptionsRef.current?.close();
+    }
+
+    const toPDF = async () =>{
+        DocumentPicker.getDocumentAsync({type: "application/pdf", copyToCacheDirectory:false})
+            .then(result => {
+                if (result.type !== "cancel") {
+                    let fileObj = { 
+                        uri: result.uri, 
+                        filename: result.name,
+                        folder: 'docs'
+                    };
+        
+                    console.log(fileObj);
+        
+                    AddSelectedFile([...selectedFiles,fileObj]);
+                }
+            })
+            .catch((error) => {
+                alert("uploadFile: "+ error);
+            });
     }
 
     return (
@@ -151,7 +231,7 @@ export default function Publish({ route,navigation }) {
                         </AttachmentView>
                     </AttachmentButton>
 
-                    <SendButton>
+                    <SendButton onPress={onSend}>
                         <SendView>
                             <SendText>Enviar</SendText>
                             <Feather 
@@ -222,7 +302,8 @@ export default function Publish({ route,navigation }) {
                     />
                 </AttachmentOptionButton>
                 <ViewLine/>
-                <AttachmentOptionButton>
+                <AttachmentOptionButton
+                    onPress={toPDF}>
                     <FontAwesome5
                         name={"file-pdf"}
                         size={22}

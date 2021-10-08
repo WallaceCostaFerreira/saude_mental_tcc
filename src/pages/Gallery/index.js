@@ -59,7 +59,7 @@ export default function Gallery({ route,navigation }) {
 
   const _textStyle = {
     color: 'white',
-    fontSize:16,
+    fontSize:15,
     textTransform:'uppercase',
     fontWeight:'bold',
   };
