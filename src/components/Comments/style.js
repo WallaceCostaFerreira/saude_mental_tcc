@@ -18,21 +18,22 @@ export const ProfileText = styled.Text`
 
 export const CommentView = styled.View`
     width: 300px;
-    flex-direction: row;
+    flex-direction: column;
+    padding-top: 5px;
     padding-bottom: 10px;
     border-bottom-width:1px;
     border-bottom-color:${theme.colors.lightGray};
 `;
 
 export const CommentProfileView = styled.View`
-    width: 20%;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
 `;
 
 export const CommentTextView = styled.View`
     flex: 1;
+    padding-top: 10px;
     margin-left: 10px;
 `;
 
