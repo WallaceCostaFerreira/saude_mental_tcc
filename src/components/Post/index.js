@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Feather from 'react-native-vector-icons/Feather';
+import { ActivityIndicator } from 'react-native';
 
 import {
     PostView,
@@ -10,6 +11,7 @@ import {
     PostCommunityText,
     PostBody,
     PostText,
+    CarrouselView,
     PostImage,
     PostActions,
     PostButton,
@@ -18,16 +20,49 @@ import {
 } from './style';
 
 
-import imgTest from '../../../assets/imgteste.jpg'
+import firebase from '../../config/Firebaseconfig';
 import theme from '../../constants/theme';
 
 class Post extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {  characteres: this.props.textPublish.length };
+        this.state = {  
+            characteres: this.props.textPublish.length,
+            urls:[]
+        };
 
         this.showDescription = this.showDescription.bind(this);
+    }
+
+    //Montando componente do post
+    componentDidMount = () => {
+        this.props.imagePost.map((dado, index) => {
+            if(dado.startsWith('media/')){
+                firebase.storage().ref(dado).getDownloadURL().then((url) => {
+                    this.setState({ 
+                        urls: this.state.urls.concat([url]),
+                    })
+                });
+            }
+        })
+    }
+
+    MontaImagens = () => {
+        if(!this.props.imagePost){
+            return (<ActivityIndicator size="large" color={theme.colors.primary}/> )
+        }else{
+            return (
+                this.props.imagePost.map(function(dado, index) {
+                    if(dado.startsWith('media/')){
+                        firebase.storage().ref(dado).getDownloadURL().then(function(url) {
+                            url != null && 
+                            <PostImage key={index} source={ {uri: url }}/>
+                        });
+                    }
+                })
+            )
+        }
     }
 
     showDescription() {
@@ -41,24 +76,35 @@ class Post extends Component{
         const { onReportPropsClick } = this.props;
         const { onCommentsPropsClick } = this.props;
         const { savePublications } = this.props;
+        const { downloadDocs } = this.props;
 
         return (
             <FeedContainer>
                 <PostView>
                     <PostHeader>
                         <ProfileView>
-                            <ProfileImg source={ imgTest } />
+                            {/* <ProfileImg source={ imgTest } /> */}
+                            <ProfileImg>
+                                <Feather
+                                    name={'user'}
+                                    size={18}
+                                    color={theme.colors.white}
+                                />
+                            </ProfileImg>
                             <ProfileText>{this.props.name}</ProfileText>
                         </ProfileView>
                         <PostCommunityText>{this.props.community}</PostCommunityText>
-                        
-                        <Feather
-                            style={{ margin:3 }}
-                            name={'more-vertical'}
-                            size={14}
-                            color={theme.colors.black}
-                            onPress={() => onReportPropsClick()}
-                        />
+                        {onReportPropsClick ? 
+                            <Feather
+                                style={{ margin:3 }}
+                                name={'flag'}
+                                size={14}
+                                color={theme.colors.red}
+                                onPress={() => onReportPropsClick()}
+                            />
+                            :
+                            <PostView></PostView>
+                        }
                     </PostHeader>
                     <PostBody>
                         <PostText
@@ -72,7 +118,15 @@ class Post extends Component{
                                 </PostText>
                             : <PostText>{ this.props.textPublish }</PostText>}
                         </PostText>
-                        <PostImage source={ imgTest }/>
+                        <CarrouselView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}>
+                            {this.state.urls 
+                                && this.state.urls.map(function(dado, index){
+                                    return(<PostImage key={index} source={ {uri: dado }}/>)
+                                })
+                            }
+                        </CarrouselView>
                     </PostBody>
                     <PostActions>
                         {this.props.saveText &&
@@ -97,6 +151,18 @@ class Post extends Component{
                             />
                             <PostActionText>Comentar</PostActionText>
                         </PostButton>
+                        {downloadDocs &&
+                            <PostButton
+                                onPress={() => downloadDocs()}>
+                                <Feather
+                                    style={{ marginRight:6 }}
+                                    name={'download'}
+                                    size={20}
+                                    color={theme.colors.black}
+                                />
+                                <PostActionText>Conteúdo</PostActionText>
+                            </PostButton>
+                        }
                     </PostActions>
                 </PostView>
             </FeedContainer>

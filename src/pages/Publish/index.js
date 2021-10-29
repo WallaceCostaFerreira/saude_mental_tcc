@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Platform } from 'react-native';
+import { 
+    Platform, 
+    ToastAndroid as Toast 
+} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -7,7 +10,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import theme from '../../constants/theme';
 import { MediaType } from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import firebase,{ PostsRef, UsersRef } from '../../config/Firebaseconfig';
+
 import uuid from "uuid";
 import * as DocumentPicker from 'expo-document-picker';
 
@@ -39,49 +44,86 @@ import {
 
 export default function Publish({ route,navigation }) {
     const [imageArr, setImageArr] = useState([]);
+    const [descricacao, setDescricao] = useState ([""]);
     const [selectedFiles, AddSelectedFile] = useState([]);
     const [fileUrls, setFileUrls] = useState([]);
-
-
     const dataImages = route.params?.data;
     const attachmentOptionsRef = useRef(null);
     const sendRef = useRef(null);
-    const [selectedValue, setSelectedValue] = useState("");
+    const [selectedValue, setSelectedValue] = useState("depressao");
 
-    const onAttachmentOptions = () => {
-        attachmentOptionsRef.current?.open();
-    };
-
-    //Volta para a tela de Feed
-    const toFeed = () =>{
-        navigation.navigate("Feed");
-    }
-
+    // Envia informações para o Firestore e Storage
     const onSend = () => {
         
-        selectedFiles.forEach(element => {
-            uploadFile(element)
-                .then(firebaseUrl => {
-                    alert("Sucesso!! URL: " + firebaseUrl);
+        let dadosFireStore = {
+            comunidade: '',
+            descricao: '',
+            dtPublicacao: '',
+            nmUsuario: '',
+            imgUsuario: '',
+        };
 
-                    setFileUrls([...fileUrls, firebaseUrl]);
+        let urlsStorage = [];
+
+        dadosFireStore.comunidade = selectedValue;
+        dadosFireStore.descricao = descricacao;
+        dadosFireStore.dtPublicacao = new Date();
+        dadosFireStore.nmUsuario = route.params?.nmUsuario;
+        dadosFireStore.imgUsuario = route.params?.imgUsuario;
+        dadosFireStore.uidUser = route.params?.uidUser;
+        
+        if(selectedFiles.length > 0){
+            console.log("Iniciando envio de arquivos.");
+            selectedFiles.map(function(dado, index){
+                uploadFile(dado).then((snapshot) => {
+                    console.log("Arquivo ",index + 1," enviado!");
+                    // setFileUrls([...fileUrls ,snapshot._delegate._location.path_]);
+                    urlsStorage.push(snapshot._delegate._location.path_)
+
+                    if(selectedFiles.length - 1 == index){
+                        enviaDadosFirestore(dadosFireStore, urlsStorage);
+                    }
+                }).catch((error) => {
+                    console.log("Erro ao enviar arquivo ",index + 1," - ",error);
                 })
-                .catch((error) => {
-                    alert("uploadFile: " + error);
-                });
-        });
-
-        console.log(fileUrls);
+            })
+        }else{
+            enviaDadosFirestore(dadosFireStore, urlsStorage);
+        }
     }
 
-    uploadFile = async (file) => {
+    // Salva dados no firestore do Post e no Usuário o id do post.
+    const enviaDadosFirestore = (dadosFireStore, urlsStorage) => {
+
+        const docRandomico = PostsRef.doc();
+        docRandomico.set({
+            dadosFireStore,
+            urlsStorage
+        }).then(() =>{
+            Toast.show("Publicação criada com sucesso!",Toast.SHORT);
+        }).catch((error) =>{
+            console.log("Erro ao finalizar envio de publicação! ",error);
+        })
+
+        let idPost = docRandomico._delegate._key.path.segments[1];
+        
+        UsersRef.doc(route.params?.uidUser).set({
+            yourPublications: firebase.firestore.FieldValue.arrayUnion(idPost)
+        },{merge:true});
+        toFeed();
+    }
+
+    // Upload do arquivo para Storage
+    const uploadFile = async (file) => {
         const response = await fetch(file.uri);
         const blob = await response.blob();
 
-        var ref = firebase.storage().ref().child(file.folder +"/"+ uuid.v1() +"_"+ file.filename);
-        return ref.put(blob);
+        var ref = await firebase.storage().ref().child(file.folder +"/"+ uuid.v1() +"_"+ file.filename);
+        ref.put(blob);
+        return ref;
     }
     
+    // Ativa quando retorna dados da tela de Gallery
     useEffect(() => {
         if(dataImages){
             dataImages.map(function(image, index){
@@ -92,16 +134,24 @@ export default function Publish({ route,navigation }) {
                     folder: 'media'
                 };
 
-                console.log(fileObj);
-
                 AddSelectedFile([...selectedFiles,fileObj]);
-
                 setImageArr([...imageArr,image.uri]);
                 return true;
             });
         }
     }, [dataImages])
 
+    // Abre modal de anexos
+    const onAttachmentOptions = () => {
+        attachmentOptionsRef.current?.open();
+    };
+
+    //Volta para a tela de Feed
+    const toFeed = () =>{
+        navigation.navigate("Feed");
+    }
+
+    //Vai para a camera
     const toCamera = async () =>{
 
         const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -140,16 +190,19 @@ export default function Publish({ route,navigation }) {
         }
     }
 
+    // Vai para a seleção de imagens da galeria
     const toGalleryImage = () =>{
         navigation.navigate("Gallery",{type:MediaType.photo});
         attachmentOptionsRef.current?.close();
     }
 
+    // Vai para a seleção de videos na galeria
     const toGalleryVideo = () =>{
         navigation.navigate("Gallery",{type:MediaType.video});
         attachmentOptionsRef.current?.close();
     }
 
+    // Abre seleção de PDFs
     const toPDF = async () =>{
         DocumentPicker.getDocumentAsync({type: "application/pdf", copyToCacheDirectory:false})
             .then(result => {
@@ -166,7 +219,7 @@ export default function Publish({ route,navigation }) {
                 }
             })
             .catch((error) => {
-                alert("uploadFile: "+ error);
+                alert("Erro ao tentar selecionar PDF - "+ error);
             });
     }
 
@@ -197,11 +250,14 @@ export default function Publish({ route,navigation }) {
                 <PickerCommunity
                         selectedValue={selectedValue}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                    <PickerCommunity.Item label="Depressão" value="depressão"/>
+                    <PickerCommunity.Item label="Depressão" value="depressao"/>
                     <PickerCommunity.Item label="Ansiedade" value="ansiedade"/>
-                    <PickerCommunity.Item label="TDAH" value="TDAH"/>
+                    <PickerCommunity.Item label="TDAH" value="tdah"/>
                 </PickerCommunity>
-                <TextPublish/>
+                <TextPublish
+                    value = {descricacao}
+                    onChangeText = {(text) => setDescricao(text)}
+                />
                 <AttachmentSelectedContainer
                     horizontal
                     showsHorizontalScrollIndicator={false}

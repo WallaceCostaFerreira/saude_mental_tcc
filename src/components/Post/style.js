@@ -24,7 +24,16 @@ export const ProfileView = styled.TouchableOpacity`
     align-items: center;
 `;
 
-export const ProfileImg = styled.Image`
+// export const ProfileImg = styled.Image`
+//     width:30px;
+//     height:30px;
+//     background:${theme.colors.primary};
+//     justify-content:center;
+//     align-items: center;
+//     border-radius:15px;
+// `;
+
+export const ProfileImg = styled.View`
     width:30px;
     height:30px;
     background:${theme.colors.primary};
@@ -52,13 +61,22 @@ export const PostBody = styled.View`
 
 export const PostText = styled.Text`
     font-size: 10px;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     color: ${theme.colors.textGray};
 `;
 
-export const PostImage = styled.Image`
+export const CarrouselView = styled.ScrollView.attrs({
+})`
     width: 100%;
-    height: 120px;
+    flex-direction: row;
+    margin-bottom: 10px;
+`;
+
+export const PostImage = styled.Image`
+    margin-right: 10px;
+    width: 240px;
+    height: 240px;
+    border-radius: 10px;
 `;
 
 export const PostActions = styled.View`

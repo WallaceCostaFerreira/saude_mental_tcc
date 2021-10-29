@@ -150,3 +150,23 @@ export const CommentTitle = styled.Text`
     color: ${theme.colors.textGray};
     margin-bottom: 10px;
 `;
+
+export const PostsViewEmptyContainer = styled.View`
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const PostsViewEmptyText = styled.Text`
+    color: #000;
+    
+`;
+
+export const ViewLoadingContainer = styled.View`
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+`;
