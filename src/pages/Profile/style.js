@@ -102,7 +102,6 @@ export const PostsViewEmptyContainer = styled.View`
 
 export const PostsViewEmptyText = styled.Text`
     color: #000;
-    
 `;
 
 

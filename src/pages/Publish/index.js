@@ -44,7 +44,7 @@ import {
 
 export default function Publish({ route,navigation }) {
     const [imageArr, setImageArr] = useState([]);
-    const [descricacao, setDescricao] = useState ([""]);
+    const [descricacao, setDescricao] = useState ("");
     const [selectedFiles, AddSelectedFile] = useState([]);
     const [fileUrls, setFileUrls] = useState([]);
     const dataImages = route.params?.data;
@@ -126,7 +126,7 @@ export default function Publish({ route,navigation }) {
     // Ativa quando retorna dados da tela de Gallery
     useEffect(() => {
         if(dataImages){
-            dataImages.map(function(image, index){
+            dataImages.map((image, index) => {
 
                 let fileObj = { 
                     uri: image.uri, 
@@ -134,8 +134,10 @@ export default function Publish({ route,navigation }) {
                     folder: 'media'
                 };
 
-                AddSelectedFile([...selectedFiles,fileObj]);
-                setImageArr([...imageArr,image.uri]);
+                console.log("Imagens - ",image);
+
+                AddSelectedFile([...selectedFiles, fileObj]);
+                setImageArr([...imageArr, image.uri]);
                 return true;
             });
         }

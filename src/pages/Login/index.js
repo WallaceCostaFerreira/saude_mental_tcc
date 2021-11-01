@@ -35,7 +35,7 @@ export default class Login extends Component{
             // Signed in
             var user = userCredential.user;
             this.setState({loading:false});
-            this.props.navigation.navigate("Feed", {uid: user.uid});
+            this.props.navigation.navigate("Feed", {idUser: user.uid});
         })
         .catch((error) => {
             var errorCode = error.code;

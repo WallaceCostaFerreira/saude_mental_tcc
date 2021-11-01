@@ -72,6 +72,10 @@ export default class Feed extends Component{
 
     //Monta tela de feed
     componentDidMount = () => {
+        this.iniciandoColetaDados();
+    }
+
+    iniciandoColetaDados = () => {
         UsersRef.doc(this.state.uidUser).get().then((querySnapshot)=>{
             this.setState({username: querySnapshot.data().name})
             console.log('Sucesso ao puxar infos do usuário!');
@@ -142,7 +146,10 @@ export default class Feed extends Component{
         }).catch(error => {
             console.log("Erro ao pegar post ",id," - ",error);
         })
-        this.setState({  loading: false })
+        this.setState({  
+            loading: false,
+            loadData:false 
+        })
     }
 
     //Listagem de posts do feed
