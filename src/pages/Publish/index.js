@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { 
     Platform, 
-    ToastAndroid as Toast 
+    ToastAndroid as Toast, 
+    View
 } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
@@ -29,6 +30,8 @@ import {
     TextPublish,
     AttachmentSelectedContainer,
     ImageSelected,
+    PdfsView,
+    PdfTitle,
     ActionView,
     AttachmentButton,
     AttachmentView,
@@ -41,11 +44,13 @@ import {
     AttachmentOptionText,
     ViewLine
 } from './style'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Publish({ route,navigation }) {
     const [imageArr, setImageArr] = useState([]);
-    const [descricacao, setDescricao] = useState ([""]);
+    const [descricacao, setDescricao] = useState ("");
     const [selectedFiles, AddSelectedFile] = useState([]);
+    const [pdfs, AddPdfs] = useState([]);
     const [fileUrls, setFileUrls] = useState([]);
     const dataImages = route.params?.data;
     const attachmentOptionsRef = useRef(null);
@@ -126,7 +131,7 @@ export default function Publish({ route,navigation }) {
     // Ativa quando retorna dados da tela de Gallery
     useEffect(() => {
         if(dataImages){
-            dataImages.map(function(image, index){
+            dataImages.map((image, index) => {
 
                 let fileObj = { 
                     uri: image.uri, 
@@ -134,8 +139,10 @@ export default function Publish({ route,navigation }) {
                     folder: 'media'
                 };
 
-                AddSelectedFile([...selectedFiles,fileObj]);
-                setImageArr([...imageArr,image.uri]);
+                console.log("Imagens - ",image);
+
+                AddSelectedFile([...selectedFiles, fileObj]);
+                setImageArr([...imageArr, image.uri]);
                 return true;
             });
         }
@@ -216,11 +223,24 @@ export default function Publish({ route,navigation }) {
                     console.log(fileObj);
         
                     AddSelectedFile([...selectedFiles,fileObj]);
+                    AddPdfs([...pdfs,fileObj]);
                 }
             })
             .catch((error) => {
                 alert("Erro ao tentar selecionar PDF - "+ error);
             });
+    }
+
+    // Remove PDF da lista de envio
+    const removePdf = (pdf) => {
+        AddSelectedFile(selectedFiles.filter(item => item.uri !== pdf)); 
+        AddPdfs(pdfs.filter(item => item.uri !== pdf));
+    }
+
+    // Remove Imagens da lista de envio
+    const removeImage = (image) => {
+        AddSelectedFile(selectedFiles.filter(item => item.uri !== image)); 
+        setImageArr(imageArr.filter(uri => uri !== image));
     }
 
     return (
@@ -264,11 +284,47 @@ export default function Publish({ route,navigation }) {
                     contentContainerStyle={{paddingRight: 15}}
                 >
                     {imageArr && 
-                        imageArr.map(function(image2,index){
-                            return(<ImageSelected key={index} source={{ uri: image2 }}/>)
+                        imageArr.map(function(image,index){
+                            return(
+                                <View key={index}>
+                                    <ImageSelected source={{ uri: image }}/>
+                                    <TouchableOpacity
+                                        style={{ alignItems: 'center', marginRight: 10}}
+                                        onPress={() => removeImage(image)}>
+                                        <Feather
+                                            name={"x"}
+                                            size={22}
+                                            color={theme.colors.red}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            )
                         })
                     }
                 </AttachmentSelectedContainer>
+                {pdfs &&
+                    pdfs.map(function(file,index){
+                        return(
+                            <PdfsView key={index}>
+                                <Feather
+                                    name={"file-text"}
+                                    size={22}
+                                    color={theme.colors.textGray}
+                                />
+                                <PdfTitle>{file.filename}</PdfTitle>
+                                <TouchableOpacity
+                                    onPress={() => removePdf(file.uri)}>
+                                    <Feather
+                                        name={"x"}
+                                        size={22}
+                                        color={theme.colors.red}
+                                    />
+                                </TouchableOpacity>
+                            </PdfsView>
+                        )
+                    })
+
+                }
                 <ActionView>
                     <AttachmentButton
                         onPress={onAttachmentOptions}>

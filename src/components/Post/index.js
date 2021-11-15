@@ -160,7 +160,7 @@ class Post extends Component{
                                     size={20}
                                     color={theme.colors.black}
                                 />
-                                <PostActionText>Conteúdo</PostActionText>
+                                <PostActionText>Doc's</PostActionText>
                             </PostButton>
                         }
                     </PostActions>

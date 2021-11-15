@@ -71,6 +71,24 @@ export const ImageSelected = styled.Image`
     border-radius: 8px;
 `;
 
+export const PdfsView = styled.View`
+    width: 90%;
+    height: 30px;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: ${theme.colors.lightGray};
+    align-items: center;
+    justify-content: space-around;
+`;
+
+export const PdfTitle = styled.Text`
+
+`;
+
+
 export const ActionView = styled.View`
     width: 90%;
     flex-direction: row;

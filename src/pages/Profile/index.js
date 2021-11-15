@@ -62,6 +62,10 @@ export default class Profile extends Component{
             console.log('Sucesso ao puxar suas publicações!');
         }).catch((error) => {
             console.log('Erro ao puxar suas publicações - ',error)
+            
+            this.setState({ 
+                loadData: false,
+            })
         });
     }
     
@@ -84,6 +88,10 @@ export default class Profile extends Component{
                 console.log("Erro ao pegar post ",id," - ",error);
             })
         ));
+        
+        this.setState({ 
+            loadData: false,
+        })
 
         
     }
@@ -197,11 +205,20 @@ export default class Profile extends Component{
         })
         UsersRef.doc(this.state.uidUser).get().then((querySnapshot) => {
 
-            this.pegaDadosPost(querySnapshot.data().yourPublications);
+            if(querySnapshot.data()){
+                this.pegaDadosPost(querySnapshot.data().yourPublications);
+            }else{
+                this.setState({ 
+                    loadData: false,
+                })
+            }
 
             console.log('Sucesso ao puxar suas publicações!');
         }).catch((error) => {
             console.log('Erro ao puxar suas publicações - ',error)
+            this.setState({ 
+                loadData: false,
+            })
         });
     }
 
@@ -227,6 +244,7 @@ export default class Profile extends Component{
                         </CommunityBody>
                     </CommunityView> */}
                     <FlatList
+                        contentContainerStyle={{ flexGrow: 1 }}
                         data={this.state.dadosPost}
                         renderItem={this.renderItem}
                         ListHeaderComponent={this.renderHeader}

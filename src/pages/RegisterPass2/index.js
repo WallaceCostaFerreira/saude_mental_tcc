@@ -68,7 +68,7 @@ export default class RegisterPass2 extends Component{
         })
         .then(() => {
             console.log("Dados do usuários salvo!");
-            this.props.navigation.navigate("Feed");
+            this.props.navigation.navigate("Feed",{idUser: this.state.uid});
         })
         .catch((error) => {
             console.error("Error writing document: ", error);

@@ -14,7 +14,7 @@ const Communities = () => {
     return (
         <CommunityView>
             <CommunityHeader>
-                <CommunityText>Suas comunidades</CommunityText>
+                <CommunityText>Nossas comunidades</CommunityText>
                 <Feather
                     style={{ margin:3 }}
                     name={'more-horizontal'}
@@ -28,24 +28,6 @@ const Communities = () => {
                 </CommunityButton>
                 <CommunityButton>
                     <CommunityText>Depressão</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
-                </CommunityButton>
-                <CommunityButton>
-                    <CommunityText>TDAH</CommunityText>
                 </CommunityButton>
                 <CommunityButton>
                     <CommunityText>TDAH</CommunityText>
