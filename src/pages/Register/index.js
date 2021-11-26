@@ -48,13 +48,13 @@ export default class Register extends Component{
                 <TextInput 
                     style={styles.input}
                     type="text"
-                    placeholder="Enter your e-mail"
+                    placeholder="E-mail"
                     onChangeText={(text)=>this.setState({email: text})}
                     value={this.state.email}/>
                 <TextInput 
                     style={styles.input}
                     type="text"
-                    placeholder="Enter a password"
+                    placeholder="Senha"
                     onChangeText={(text)=>this.setState({password: text})}
                     value={this.state.password}
                     secureTextEntry={true}
@@ -73,7 +73,7 @@ export default class Register extends Component{
                 <Text style={styles.txtCadastrar}>Já tenho cadastro, 
                     <Text 
                         style={styles.txtlink}
-                        onPress={() => this.toLogin()}> logar-se!
+                        onPress={() => this.toLogin()}> Entrar!
                     </Text>
                 </Text>
             </KeyboardAvoidingView>

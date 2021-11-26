@@ -45,19 +45,18 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 10,
         alignItems:'center',
-        justifyContent:'center',
+        justifyContent:'space-between',
         marginBottom:8,
+        flexDirection: "row",
         flexWrap:'wrap',
     },checkboxContainer:{
         flexDirection: "row",
-        marginLeft:8,
-        marginRight:8,
         alignItems: "center",
-        justifyContent: 'flex-end'
+        justifyContent: 'space-between'
     },checkbox:{
     }, txtCommunity:{
-        fontSize:14,
-        color:'#ABABAB',
+        fontSize:16,
+        color:'#000',
         margin: 5,
     }
 });

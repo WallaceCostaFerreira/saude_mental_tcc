@@ -84,7 +84,7 @@ export default class RegisterPass2 extends Component{
                     onChangeText={(text) => this.setState({name:text})}
                     value={this.state.name}
                     type="text"
-                    placeholder="Your name"/>
+                    placeholder="Seu nome"/>
                 <Text style={styles.subtitle}>Nossas comunidades</Text>
 
                 <View style={styles.CommunityCheckbox}>
@@ -94,10 +94,6 @@ export default class RegisterPass2 extends Component{
                         <View 
                             key={index}
                             style={styles.checkboxContainer}>
-                            <CheckBox 
-                                value={this.state.isSelected[index]}
-                                onValueChange={(estado) => this.separaComunidades(estado,index)}
-                                style={styles.checkbox}/>
                             <Text style={styles.txtCommunity}>{dados.name}</Text>
                         </View>
 

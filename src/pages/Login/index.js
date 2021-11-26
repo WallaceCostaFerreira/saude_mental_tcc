@@ -80,13 +80,13 @@ export default class Login extends Component{
                 <TextInput 
                     style={styles.input}
                     type="text"
-                    placeholder="Enter your e-mail"
+                    placeholder="E-mail"
                     value={this.state.email}
                     onChangeText={(text)=>this.setState({email: text})}/>
                 <TextInput 
                     style={styles.input}
                     type="text"
-                    placeholder="Enter a password"
+                    placeholder="Senha"
                     secureTextEntry={true}
                     value={this.state.password}
                     onChangeText={(text)=>this.setState({password: text})}
@@ -97,7 +97,7 @@ export default class Login extends Component{
                     onPress={() => this.loginFirebase()}>
                     {this.state.loading 
                     ? <ActivityIndicator size="small" color="#fff"/> 
-                    : <Text style={styles.txtbutton}>Logar</Text>}
+                    : <Text style={styles.txtbutton}>Entrar</Text>}
                     
                 </TouchableOpacity>
                 <Text style={styles.txtCadastrar}>Não tenho cadastro, 

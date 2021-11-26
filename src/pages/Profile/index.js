@@ -176,6 +176,7 @@ export default class Profile extends Component{
     sendCommentPublication = (idPublication) => {
         let dados = {
             user: this.state.nmUsuario,
+            userUid: this.state.uidUser,
             comment: this.state.commentAtual
         }
 

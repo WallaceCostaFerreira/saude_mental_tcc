@@ -15,12 +15,6 @@ const Communities = () => {
         <CommunityView>
             <CommunityHeader>
                 <CommunityText>Nossas comunidades</CommunityText>
-                <Feather
-                    style={{ margin:3 }}
-                    name={'more-horizontal'}
-                    size={14}
-                    color={theme.colors.black}
-                />
             </CommunityHeader>
             <CommunityBody>
                 <CommunityButton>

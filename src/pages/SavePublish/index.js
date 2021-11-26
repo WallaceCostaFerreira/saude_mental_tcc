@@ -159,6 +159,7 @@ export default class SavePublish extends Component{
             <Comments
                 nameUser={item.user}
                 comment={item.comment}
+                deleteComment={item.uidUser}
             />
         )
         
@@ -168,6 +169,7 @@ export default class SavePublish extends Component{
     sendCommentPublication = (idPublication) => {
         let dados = {
             user: this.state.username,
+            userUid: this.state.uidUser,
             comment: this.state.commentAtual
         }
 

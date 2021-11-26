@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "saude_mental_tcc",
+    "name": "Saúde Mental",
     "slug": "saude_mental_tcc",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,13 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tccunip.saudemental",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.tccunip.saudemental",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -40,7 +40,7 @@ export default function Gallery({ route,navigation }) {
       initialLoad: 100,
       assetsType: type,
       minSelection: 1,
-      maxSelection: 10,
+      maxSelection: 1,
       portraitCols: 4,
       landscapeCols: 4,
     }),
@@ -105,6 +105,7 @@ export default function Gallery({ route,navigation }) {
         bg: '#0eb14970',
         size: 26,
       },
+      onSuccess: (e) => onSuccess(e),
     }),
     []
   );
